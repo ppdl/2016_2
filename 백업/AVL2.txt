@@ -1,0 +1,23 @@
+public AVLTreeNode insert(AVLTreeNode root, int data){
+       if(root.getLeft()==null && data < root.getData()) {
+          AVLTreeNode newest = new AVLTreeNode(data);
+          root.setLeft(newest);
+          size++;
+          return root;
+       }
+       else if(root.getRight()==null && data > root.getData()){
+          AVLTreeNode newest = new AVLTreeNode(data);
+          root.setRight(newest);
+          size++;
+          return root;
+       }
+       else if(data < root.getData()){
+          root.setLeft(insert(root.getLeft(), data));
+          root = balance(root);
+       }
+       else if(data > root.getData()){
+          root.setRight(insert(root.getRight(), data));
+          root = balance(root);
+       }
+       return root;
+    }

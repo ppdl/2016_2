@@ -1,0 +1,229 @@
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound
+Name sound.1010 sound.1001 sound.1000 sound.0111 sound.0110 sound.0101 sound.0100 sound.0011 sound.0010 sound.0001 sound.0000 
+sound.0000 0 0 0 0 0 0 0 0 0 0 0 
+sound.0001 0 0 0 0 0 0 0 0 0 1 1 
+sound.0010 0 0 0 0 0 0 0 0 1 0 1 
+sound.0011 0 0 0 0 0 0 0 1 0 0 1 
+sound.0100 0 0 0 0 0 0 1 0 0 0 1 
+sound.0101 0 0 0 0 0 1 0 0 0 0 1 
+sound.0110 0 0 0 0 1 0 0 0 0 0 1 
+sound.0111 0 0 0 1 0 0 0 0 0 0 1 
+sound.1000 0 0 1 0 0 0 0 0 0 0 1 
+sound.1001 0 1 0 0 0 0 0 0 0 0 1 
+sound.1010 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|pipo_internal_state
+Name pipo_internal_state.11 pipo_internal_state.10 pipo_internal_state.01 pipo_internal_state.00 
+pipo_internal_state.00 0 0 0 0 
+pipo_internal_state.01 0 0 1 1 
+pipo_internal_state.10 0 1 0 1 
+pipo_internal_state.11 1 0 0 1 
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|lock_internal_state
+Name lock_internal_state.11 lock_internal_state.10 lock_internal_state.01 lock_internal_state.00 
+lock_internal_state.00 0 0 0 0 
+lock_internal_state.01 0 0 1 1 
+lock_internal_state.10 0 1 0 1 
+lock_internal_state.11 1 0 0 1 
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|err_internal_state
+Name err_internal_state.00 err_internal_state.10 err_internal_state.01 
+err_internal_state.00 0 0 0 
+err_internal_state.01 1 0 1 
+err_internal_state.10 1 1 0 
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|open_internal_state
+Name open_internal_state.00 open_internal_state.10 open_internal_state.01 
+open_internal_state.00 0 0 0 
+open_internal_state.01 1 0 1 
+open_internal_state.10 1 1 0 
+
+State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state
+Name internal_state.STATE_PIPOPIPO internal_state.STATE_LOCK internal_state.STATE_ERR internal_state.STATE_OPEN internal_state.STATE_KEY internal_state.S0 
+internal_state.S0 0 0 0 0 0 0 
+internal_state.STATE_KEY 0 0 0 0 1 1 
+internal_state.STATE_OPEN 0 0 0 1 0 1 
+internal_state.STATE_ERR 0 0 1 0 0 1 
+internal_state.STATE_LOCK 0 1 0 0 0 1 
+internal_state.STATE_PIPOPIPO 1 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state
+Name fnd_state.101 fnd_state.100 fnd_state.011 fnd_state.010 fnd_state.001 fnd_state.000 
+fnd_state.000 0 0 0 0 0 0 
+fnd_state.001 0 0 0 0 1 1 
+fnd_state.010 0 0 0 1 0 1 
+fnd_state.011 0 0 1 0 0 1 
+fnd_state.100 0 1 0 0 0 1 
+fnd_state.101 1 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|KEYPAD_MODULE:module_key|matrix_state
+Name matrix_state.11 matrix_state.10 matrix_state.00 matrix_state.01 
+matrix_state.01 0 0 0 0 
+matrix_state.00 0 0 1 1 
+matrix_state.10 0 1 0 1 
+matrix_state.11 1 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|close_state
+Name close_state.CS_WAIT1 close_state.CS_OK close_state.CS_WAIT2 
+close_state.CS_WAIT1 0 0 0 
+close_state.CS_WAIT2 1 0 1 
+close_state.CS_OK 1 1 0 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|main_state
+Name main_state.OPEN main_state.ONE_MINUTE_LOCK main_state.LOCK main_state.PASSWORD_CHECK main_state.PRE_SET main_state.CLOSE main_state.PIPO main_state.FAIL main_state.SET_CHECK main_state.SET_READ 
+main_state.SET_READ 0 0 0 0 0 0 0 0 0 0 
+main_state.SET_CHECK 0 0 0 0 0 0 0 0 1 1 
+main_state.FAIL 0 0 0 0 0 0 0 1 0 1 
+main_state.PIPO 0 0 0 0 0 0 1 0 0 1 
+main_state.CLOSE 0 0 0 0 0 1 0 0 0 1 
+main_state.PRE_SET 0 0 0 0 1 0 0 0 0 1 
+main_state.PASSWORD_CHECK 0 0 0 1 0 0 0 0 0 1 
+main_state.LOCK 0 0 1 0 0 0 0 0 0 1 
+main_state.ONE_MINUTE_LOCK 0 1 0 0 0 0 0 0 0 1 
+main_state.OPEN 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index
+Name index.111 index.110 index.101 index.100 index.011 index.010 index.001 index.000 
+index.000 0 0 0 0 0 0 0 0 
+index.001 0 0 0 0 0 0 1 1 
+index.010 0 0 0 0 0 1 0 1 
+index.011 0 0 0 0 1 0 0 1 
+index.100 0 0 0 1 0 0 0 1 
+index.101 0 0 1 0 0 0 0 1 
+index.110 0 1 0 0 0 0 0 1 
+index.111 1 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_read_state
+Name set_read_state.SRS_FINISH set_read_state.SRS_OVER_FLOW set_read_state.SRS_I6 set_read_state.SRS_WAIT5 set_read_state.SRS_I5 set_read_state.SRS_WAIT4 set_read_state.SRS_I4 set_read_state.SRS_WAIT3 set_read_state.SRS_I3 set_read_state.SRS_WAIT2 set_read_state.SRS_I2 set_read_state.SRS_WAIT1 set_read_state.SRS_I1 set_read_state.SRS_WAIT0 set_read_state.SRS_I0 set_read_state.SRS_IDLE3 set_read_state.SRS_IDLE2 set_read_state.SRS_IDLE1 set_read_state.SRS_IDLE0 
+set_read_state.SRS_IDLE0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+set_read_state.SRS_IDLE1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+set_read_state.SRS_IDLE2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+set_read_state.SRS_IDLE3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+set_read_state.SRS_I0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+set_read_state.SRS_WAIT0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+set_read_state.SRS_I1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+set_read_state.SRS_WAIT1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+set_read_state.SRS_I2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+set_read_state.SRS_WAIT2 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_I3 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_WAIT3 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_I4 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_WAIT4 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_I5 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_WAIT5 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_I6 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_OVER_FLOW 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+set_read_state.SRS_FINISH 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|length
+Name length.111 length.110 length.101 length.100 length.011 length.010 length.001 length.000 
+length.000 0 0 0 0 0 0 0 0 
+length.001 0 0 0 0 0 0 1 1 
+length.010 0 0 0 0 0 1 0 1 
+length.011 0 0 0 0 1 0 0 1 
+length.100 0 0 0 1 0 0 0 1 
+length.101 0 0 1 0 0 0 0 1 
+length.110 0 1 0 0 0 0 0 1 
+length.111 1 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_check_state
+Name set_check_state.SCS_ERR set_check_state.SCS_OK set_check_state.SCS_INDEX6 set_check_state.SCS_INDEX5 set_check_state.SCS_INDEX4 set_check_state.SCS_INDEX3 set_check_state.SCS_DIV set_check_state.SCS_PRE set_check_state.SCS_IDLE3 set_check_state.SCS_IDLE2 set_check_state.SCS_IDLE1 set_check_state.SCS_IDLE0 
+set_check_state.SCS_IDLE0 0 0 0 0 0 0 0 0 0 0 0 0 
+set_check_state.SCS_IDLE1 0 0 0 0 0 0 0 0 0 0 1 1 
+set_check_state.SCS_IDLE2 0 0 0 0 0 0 0 0 0 1 0 1 
+set_check_state.SCS_IDLE3 0 0 0 0 0 0 0 0 1 0 0 1 
+set_check_state.SCS_PRE 0 0 0 0 0 0 0 1 0 0 0 1 
+set_check_state.SCS_DIV 0 0 0 0 0 0 1 0 0 0 0 1 
+set_check_state.SCS_INDEX3 0 0 0 0 0 1 0 0 0 0 0 1 
+set_check_state.SCS_INDEX4 0 0 0 0 1 0 0 0 0 0 0 1 
+set_check_state.SCS_INDEX5 0 0 0 1 0 0 0 0 0 0 0 1 
+set_check_state.SCS_INDEX6 0 0 1 0 0 0 0 0 0 0 0 1 
+set_check_state.SCS_OK 0 1 0 0 0 0 0 0 0 0 0 1 
+set_check_state.SCS_ERR 1 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index2
+Name index2.110 index2.101 index2.100 index2.011 index2.010 index2.001 index2.000 
+index2.000 0 0 0 0 0 0 0 
+index2.001 0 0 0 0 0 1 1 
+index2.010 0 0 0 0 1 0 1 
+index2.011 0 0 0 1 0 0 1 
+index2.100 0 0 1 0 0 0 1 
+index2.101 0 1 0 0 0 0 1 
+index2.110 1 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|password_check_state
+Name password_check_state.PCS_OK password_check_state.PCS_ERR password_check_state.PCS_PRE6 password_check_state.PCS_PRE5 password_check_state.PCS_PRE4 password_check_state.PCS_PRE3 password_check_state.PCS_I6 password_check_state.PCS_WAIT5 password_check_state.PCS_I5 password_check_state.PCS_WAIT4 password_check_state.PCS_I4 password_check_state.PCS_WAIT3 password_check_state.PCS_I3 password_check_state.PCS_WAIT2 password_check_state.PCS_I2 password_check_state.PCS_WAIT1 password_check_state.PCS_I1 password_check_state.PCS_WAIT0 password_check_state.PCS_I0 password_check_state.PCS_IDLE3 password_check_state.PCS_IDLE2 password_check_state.PCS_IDLE1 password_check_state.PCS_IDLE0 
+password_check_state.PCS_IDLE0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+password_check_state.PCS_IDLE1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+password_check_state.PCS_IDLE2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+password_check_state.PCS_IDLE3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+password_check_state.PCS_I0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+password_check_state.PCS_WAIT0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+password_check_state.PCS_I1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+password_check_state.PCS_WAIT1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+password_check_state.PCS_I2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+password_check_state.PCS_WAIT2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_I3 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_WAIT3 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_I4 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_WAIT4 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_I5 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_WAIT5 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_I6 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_PRE3 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_PRE4 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_PRE5 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_PRE6 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_ERR 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+password_check_state.PCS_OK 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|open_state
+Name open_state.OS_CLOSE open_state.OS_TIME_WAIL open_state.OS_DOOR_WAIT open_state.OS_IDLE3 open_state.OS_IDLE2 open_state.OS_IDLE1 open_state.OS_IDLE0 
+open_state.OS_IDLE0 0 0 0 0 0 0 0 
+open_state.OS_IDLE1 0 0 0 0 0 1 1 
+open_state.OS_IDLE2 0 0 0 0 1 0 1 
+open_state.OS_IDLE3 0 0 0 1 0 0 1 
+open_state.OS_DOOR_WAIT 0 0 1 0 0 0 1 
+open_state.OS_TIME_WAIL 0 1 0 0 0 0 1 
+open_state.OS_CLOSE 1 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|fail_state
+Name fail_state.FS_PIPO fail_state.FS_RETURN fail_state.FS_NUMBER_CHECK fail_state.FS_TIME_CHECK fail_state.FS_IDLE3 fail_state.FS_IDLE2 fail_state.FS_IDLE1 fail_state.FS_IDLE0 
+fail_state.FS_IDLE0 0 0 0 0 0 0 0 0 
+fail_state.FS_IDLE1 0 0 0 0 0 0 1 1 
+fail_state.FS_IDLE2 0 0 0 0 0 1 0 1 
+fail_state.FS_IDLE3 0 0 0 0 1 0 0 1 
+fail_state.FS_TIME_CHECK 0 0 0 1 0 0 0 1 
+fail_state.FS_NUMBER_CHECK 0 0 1 0 0 0 0 1 
+fail_state.FS_RETURN 0 1 0 0 0 0 0 1 
+fail_state.FS_PIPO 1 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|pipo_state
+Name pipo_state.PS_OFF pipo_state.PS_ON pipo_state.PS_IDLE3 pipo_state.PS_IDLE2 pipo_state.PS_IDLE1 pipo_state.PS_IDLE0 
+pipo_state.PS_IDLE0 0 0 0 0 0 0 
+pipo_state.PS_IDLE1 0 0 0 0 1 1 
+pipo_state.PS_IDLE2 0 0 0 1 0 1 
+pipo_state.PS_IDLE3 0 0 1 0 0 1 
+pipo_state.PS_ON 0 1 0 0 0 1 
+pipo_state.PS_OFF 1 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|lock_state
+Name lock_state.LS_ONE_MINUTE_LOCK lock_state.LS_RETURN lock_state.LS_NUMBER_CHECK lock_state.LS_TIME_CHECK lock_state.LS_IDLE3 lock_state.LS_IDLE2 lock_state.LS_IDLE1 lock_state.LS_IDLE0 
+lock_state.LS_IDLE0 0 0 0 0 0 0 0 0 
+lock_state.LS_IDLE1 0 0 0 0 0 0 1 1 
+lock_state.LS_IDLE2 0 0 0 0 0 1 0 1 
+lock_state.LS_IDLE3 0 0 0 0 1 0 0 1 
+lock_state.LS_TIME_CHECK 0 0 0 1 0 0 0 1 
+lock_state.LS_NUMBER_CHECK 0 0 1 0 0 0 0 1 
+lock_state.LS_RETURN 0 1 0 0 0 0 0 1 
+lock_state.LS_ONE_MINUTE_LOCK 1 0 0 0 0 0 0 1 
+
+State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|one_minute_lock_state
+Name one_minute_lock_state.OMLS_OFF one_minute_lock_state.OMLS_LOCK one_minute_lock_state.OMLS_IDLE3 one_minute_lock_state.OMLS_IDLE2 one_minute_lock_state.OMLS_IDLE1 one_minute_lock_state.OMLS_IDLE0 
+one_minute_lock_state.OMLS_IDLE0 0 0 0 0 0 0 
+one_minute_lock_state.OMLS_IDLE1 0 0 0 0 1 1 
+one_minute_lock_state.OMLS_IDLE2 0 0 0 1 0 1 
+one_minute_lock_state.OMLS_IDLE3 0 0 1 0 0 1 
+one_minute_lock_state.OMLS_LOCK 0 1 0 0 0 1 
+one_minute_lock_state.OMLS_OFF 1 0 0 0 0 1 

@@ -1,0 +1,564 @@
+ 
+  Name Cho young jae
+  Student ID 2013147513
+  Don't forget to remove the package line.
+ 
+
+public class AVLTree
+{
+    private AVLTreeNode root;
+    private int size;
+
+     
+      Our instance variables.
+     
+      root - AVLTreeNode, root of our AVLTree
+      size - int, the number of elements in our AVLTree
+     
+
+    public AVLTree()
+    {
+        
+          Our constructor. 
+          Initialize the instance variables to their default values
+         
+    	root = null;
+    	size = 0;
+    	
+    }
+
+    public AVLTreeNode insert(int data)
+    {
+        
+          Constructs a new AVLTreeNode and inserts it into our AVLTree
+         
+          return the inserted AVLTreeNode or null if a node with the same data
+          already exists
+         
+    	if(contains(data)) return null;
+    	   	
+    	if(size == 0){
+    		root = new AVLTreeNode(data);
+    		root.setParent(null);
+    		size++;
+    		System.out.println(Root is created. BalanceFactor is  + root.getBalanceFactor());
+    		return root;
+    	}
+    	
+    	System.out.println(Inserting  + data + ... );
+    	
+
+    	AVLTreeNode position = root;start from root to find proper position where to insert a new node.
+    	AVLTreeNode p = null;			variable for saving position's parent node
+    	find a position
+		while(position != null){
+			p = position;
+			p.setHeight(p.getHeight()+1);
+			System.out.println(value  + p.getData() + 's height is  + p.getHeight());
+			
+			if(data  position.getData()) position = position.getLeft();
+			else if(data  position.getData()) position = position.getRight();
+			
+		}
+		
+		insert a new node
+		if(data  p.getData()){
+			p.setLeft(new AVLTreeNode(data));
+			position = p.getLeft();
+			position.setParent(p);
+		}
+		else{
+			p.setRight(new AVLTreeNode(data));
+			position = p.getRight();
+			position.setParent(p);
+		}
+		AVLTreeNode POS = position;
+    	size++;
+    	while(POS != root){
+    		POS.setHeight();
+    		POS = POS.getParent();
+    	}
+    	POS.setHeight();
+    	
+		AVLTreeNode balanceFactorStart = position;
+		set nodes' balanceFactor above of the inserted node 
+		while(balanceFactorStart != root){			
+			balanceFactorStart.setBalanceFactor();
+			System.out.println(--BalanceFactor of value + balanceFactorStart.getData() +  is  + balanceFactorStart.getBalanceFactor());
+			balanceFactorStart = balanceFactorStart.getParent();			
+			
+		}
+		set balanceFactor of the root node
+		balanceFactorStart.setBalanceFactor(); 
+		System.out.println(-BalanceFactor of value + balanceFactorStart.getData() +  is  + balanceFactorStart.getBalanceFactor());
+		
+		AVLTreeNode balanceStart = position;			
+		balance(balanceStart);
+		return position;
+    }
+
+    public AVLTreeNode retrieve(int data)
+    {
+        
+          returns the node in the tree containing the desired data
+         
+          return null if it is not in the tree
+         
+    	
+    	AVLTreeNode[] container = preorder();
+    	for(int i=0; icontainer.length; i++)
+    		if(container[i].getData() == data) return container[i];    	
+    	return null;
+    	
+    }
+
+    public boolean contains(int data)
+    {
+        
+          return whether or not the tree contains a node with the desired data
+         
+    	System.out.println(Check Contains, call preorder);
+    	AVLTreeNode[] container = preorder();
+    	for(int i=0; icontainer.length; i++)
+    		if(container[i].getData() == data) return true;
+    	return false;
+    }
+
+    public AVLTreeNode delete(int data)
+    {
+        
+          remove and return the AVLTreeNode with the desired data
+         
+          return null if the data is not in the AVLTree
+         
+    	AVLTreeNode[] container = inorder();
+    	
+    	Inorder Á¦´ë·Î ³ª¿È
+    	System.out.println(Inorder traversal);
+    	for(int i=0; icontainer.length; i++)
+    	{
+    		System.out.println(inorder[ + i + ]  + container[i].getData());
+    	}
+    	
+    	AVLTreeNode delNode = null;
+    	AVLTreeNode delNextNode = null;
+    	
+    	
+    	if(!contains(data)) return null;
+    	
+    	size--;
+    	for(int i=0; icontainer.length; i++)
+    		if(container[i].getData() == data){
+    				delNode = container[i];
+				delNextNode = container[i+1];
+    	}
+    	AVLTreeNode temp = new AVLTreeNode(delNode.getData());
+    	
+    	delNode.setData(delNextNode.getData());
+    	
+    	if(delNode.getRight() == delNextNode)delNode.setRight(delNextNode.getRight());
+    	else delNextNode.getParent().setLeft(delNextNode.getRight());
+    	
+ 
+    	balance(delNode);
+    	return temp;
+    }
+
+    public AVLTreeNode leftRotate(AVLTreeNode node)
+    {
+        
+          Perform a left rotate on the subtree rooted at node
+         
+          return the new root of the subtree
+         
+    	AVLTreeNode a = node;
+    	AVLTreeNode b = node.getRight();
+    	
+    	if(a.getParent() == null){
+    		b.setParent(null);
+    		b.setLeft(a);
+    		a.setParent(b);
+    	}
+    	else{
+    		b.setParent(a.getParent());
+        	b.getParent().setRight(b);
+        	a.setRight(b.getLeft());
+        	a.getRight().setParent(a);
+        	a.setParent(b);
+        	b.setLeft(a);
+        }
+    	
+    	a.setBalanceFactor();
+    	b.setBalanceFactor();
+    	
+    	return b;
+    }
+
+    public AVLTreeNode rightRotate(AVLTreeNode node)
+    {
+        
+          Perform a right rotate on the subtree rooted at node
+         
+          return the new root of the subtree
+         
+    	AVLTreeNode c = node;
+    	AVLTreeNode b = node.getLeft();
+    	
+    	if(c.getParent() == null){
+    		b.setParent(null);
+    		b.setRight(c);
+    		c.setParent(b);
+    	}
+    	else{
+    		b.setParent(c.getParent());
+        	b.getParent().setLeft(b);
+        	c.setLeft(b.getRight());
+        	c.getLeft().setParent(c);
+        	c.setParent(b);
+        	b.setRight(c);
+    	}
+    	
+    	b.setBalanceFactor();
+    	c.setBalanceFactor();
+    	
+    	return b;
+    }
+    
+    private int OrderIdx;
+    public AVLTreeNode[] preorder()
+    {
+        
+          return an array of AVLTreeNodes in preorder
+         
+    	OrderIdx=0;
+    	System.out.println(Preorder Processing... Size of tree is  + size);
+    	AVLTreeNode[] result = new AVLTreeNode[size];
+ 
+    	preOrder(root, result);
+    	System.out.println(Result of preorder processing );
+
+    	for(int i=0; isize; i++)
+    	{
+    		System.out.println(preorder[ + i + ]  + result[i].getData());
+    	}
+    	return result;
+
+    }
+
+    public AVLTreeNode[] postorder()
+    {
+        
+          return an array of AVLTreeNodes in postorder
+         
+    	OrderIdx=0;
+    	AVLTreeNode[] result = new AVLTreeNode[size];
+    	postOrder(root, result);
+    	return result;
+    }
+
+    public AVLTreeNode[] inorder()
+    {
+        
+          return an array of AVLTreeNodes in inorder
+         
+    	OrderIdx=0;
+    	AVLTreeNode[] result = new AVLTreeNode[size];
+    	inOrder(root, result);
+    	return result;
+    }
+    
+    public void preOrder(AVLTreeNode v, AVLTreeNode[] t)
+    {
+    	if(v != null){
+    		t[OrderIdx] = v;
+    		OrderIdx++;
+    		preOrder(v.getLeft(),t);
+    		preOrder(v.getRight(),t);
+    	}
+    }
+    
+    public void postOrder(AVLTreeNode v, AVLTreeNode[] t)
+    {
+    	if(v != null){
+    		postOrder(v.getLeft(),t);
+    		postOrder(v.getRight(),t);
+    		t[OrderIdx] = v;
+    		OrderIdx++;
+    	}
+    }
+    
+    public void inOrder(AVLTreeNode v, AVLTreeNode[] t)
+    {
+
+    	if(v.getLeft() != null)
+    		inOrder(v.getLeft(), t);
+    	t[OrderIdx] = v;
+    	OrderIdx++;
+    	if(v.getRight() != null)
+    		inOrder(v.getRight(), t);
+    }
+    
+
+    public AVLTreeNode RL(AVLTreeNode node){
+       AVLTreeNode child = node.getRight();
+       node.setRight(rightRotate(child));
+       return leftRotate(node);
+    }
+
+    public AVLTreeNode LR(AVLTreeNode node){
+       AVLTreeNode child = node.getLeft();
+       node.setLeft(leftRotate(child));
+       return rightRotate(node);
+    }
+
+    public void balance(AVLTreeNode node){
+
+    	int balanceFactor = node.getHeight(node);
+       if(balanceFactor  1){
+          if(node.getBalanceFactor()  0) node = leftRotate(node);
+          else node = LR(node);
+       }
+       else if (balanceFactor  -1){
+          if(node.getBalanceFactor()  0) node = rightRotate(node);
+          else node = RL(node);
+       }
+
+       if(node.getBalanceFactor() == 2) 
+    	   if(node.getRight().getBalanceFactor() == 1) leftRotate(node);
+    	   else leftRotate(rightRotate(node.getRight()).getParent());
+       else if(node.getBalanceFactor() == -2)
+    	   if(node.getLeft().getBalanceFactor() == -1) rightRotate(node);
+    	   else rightRotate(leftRotate(node.getLeft()).getParent());
+       else if(node.getParent() != null) balance(node.getParent());
+    }
+    public void clear()
+    {
+        
+          clear the AVLTree
+         
+    	this.root = null;
+    	this.size = 0;
+    }
+
+    public boolean isEmpty()
+    {
+        
+          return whether or not the AVLTree is empty
+         
+    	return (size == 0);
+    }
+
+    public AVLTreeNode getRoot()
+    {
+        
+          return the root of the AVLTree
+         
+    	return root;
+    }
+    public String toString()
+    {
+        
+          return a string representation of the AVLTree.
+         
+          The format is the elements of the tree in preorder, each separated
+          by a comma. There should be no spaces and no trailing commas.
+         
+    	System.out.println(ToString, call preorder);
+    	AVLTreeNode[] container = preorder();
+    	String result = container[0].toString();
+    	for(int i=1; icontainer.length; i++)
+    		result = result + , + container[i].toString();
+    	return result;
+    }
+}
+
+class AVLTreeNode
+{
+    private int data, height, balanceFactor;
+    private AVLTreeNode left, right, parent;
+
+     
+      Our instance variables.
+     
+      data - int, the data the AVLTreeNode will hold
+      height - int, the height of the AVLTreeNode
+      balanceFactor - int, the balance factor of the node
+      left - AVLTreeNode, the left child of the node
+      right - AVLTreeNode, the right child of the node
+     
+
+    public AVLTreeNode(int data)
+    {
+        
+          Our constructor. 
+          Initialize the instance variables to their default values or the
+          values passed as paramters
+         
+    	setData(data);
+    	setHeight(0);
+    	setBalanceFactor(0);	
+    	setLeft(null);
+    	setRight(null);
+    }
+
+    public void setData(int data)
+    {
+        
+          Set the value stored in data
+         
+    	this.data = data;
+    }
+
+    public void setHeight(int height)
+    {
+        
+          Set the value stored in height
+         
+    	this.height = height;
+    }
+    public void setHeight()
+    {
+    	if(left == null && right == null) height = 0;
+    	else if(left == null && right != null) height = right.getHeight()+1;
+    	else if(left != null && right == null) height = left.getHeight()+1;
+    	else{
+    		if(left.getHeight()  right.getHeight()) height = left.getHeight()+1;
+    		else height = right.getHeight()+1;
+    	}
+    }
+    public void setBalanceFactor(int balanceFactor)
+    {
+        
+          Set the value stored in balanceFactor
+         
+    	this.balanceFactor = balanceFactor;
+    }
+    
+    public void setBalanceFactor()
+    {
+    	
+    	  Set the balanceFactor of node
+    	 
+    	int bf;
+    	if(this.right == null && this.left == null) bf = 0;
+    	else if(this.right == null && this.left != null) bf = -1 - this.left.getHeight();
+    	else if(this.right != null && this.left == null) bf = this.right.getHeight() + 1;
+    	else bf = this.right.getHeight() - this.left.getHeight();
+    	
+    	this.balanceFactor = bf;
+    }
+
+    public void setLeft(AVLTreeNode left)
+    {
+        
+          Set the left child
+         
+    	this.left = left;
+    }
+
+    public void setRight(AVLTreeNode right)
+    {
+        
+          Set the right child
+         
+    	this.right = right;
+    }
+    
+    public void setParent(AVLTreeNode parent){
+    
+      Set the parent
+     
+    this.parent = parent;
+    }
+
+    public void clearLeft()
+    {
+        
+          clear the left child
+         
+    	this.left = null;
+    	if(getHeight() == (left.getHeight()+1)) this.setHeight(right.getHeight() + 1);
+    	else this.setHeight(this.getHeight()-1);
+    }
+
+    public void clearRight()
+    {
+        
+          clear the right child
+         
+    	this.right = null;
+    	if(getHeight() == (right.getHeight()+1)) setHeight(left.getHeight() + 1);
+    	else this.setHeight(this.getHeight()-1);
+    }
+
+    public int getData()
+    {
+        
+          get the data stored in the AVLTreeNode
+         
+    	return data;
+    }
+
+    public int getHeight()
+    {
+        
+          get the height of the AVLTreeNode
+         
+    	return height;
+    }
+    public int setHeight(AVLTreeNode node)
+    {
+    	int h=-1;
+    	if(node == null) return h;
+    	else if(setHeight(node.getLeft())  setHeight(node.getRight())){
+    		h = setHeight(node.getLeft()) + 1;
+    	}
+    	else h = setHeight(node.getRight()) + 1;
+    	return h;
+    }
+
+    public int getBalanceFactor()
+    {
+        
+          get the balanceFactor of the AVLTreeNode
+         
+    	return balanceFactor;
+    }
+
+    public AVLTreeNode getLeft()
+    {
+        
+          get the left child
+         
+    	return left;
+    }
+
+    public AVLTreeNode getRight()
+    {
+        
+          get the right child
+         
+    	return right;
+    }
+    
+    public AVLTreeNode getParent()
+    {
+    	
+    	  get the parent
+    	 
+    	return parent;
+    }
+    
+    public boolean isBalnce()    
+    {
+    	return (this.getBalanceFactor() == -1  this.getBalanceFactor() == 0  this.getBalanceFactor() == 1);
+    }
+
+    public String toString()
+    {
+        
+          return the string value of the data stored in the node
+         
+    	return Integer.toString(data);
+    }
+}

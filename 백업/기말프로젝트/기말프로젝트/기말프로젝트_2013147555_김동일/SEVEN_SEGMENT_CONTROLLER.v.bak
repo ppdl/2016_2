@@ -1,0 +1,672 @@
+module SEVEN_SEGMENT_CONTROLLER(display_open,display_close,display_number,clk,index,i0,i1,i2,i3,i4,i5, seg_data,seg_pos);
+	input display_open,display_close,display_number,clk;
+	input [3:0]index;
+	input [3:0]i0;
+	input [3:0]i1;
+	input [3:0]i2;
+	input [3:0]i3;
+	input [3:0]i4;
+	input [3:0]i5;
+	
+	output [7:0]seg_data;	//data값
+	output [5:0]seg_pos;		//position 값		
+	reg [7:0]seg_data;
+	reg [5:0]seg_pos;
+	
+	reg [2:0] fnd_state;	//출력할 곳 지정
+	reg [9:0] fnd_count;	//출력을 위한 클락을 만드는 카운터
+	reg fnd_clock;			//출력을 위한 클락 
+	
+	initial	begin
+		fnd_state = 0;
+		fnd_count = 0;
+		fnd_clock = 0;
+	end
+	
+	always @ (posedge clk)
+	begin
+		if(fnd_count == 1000)
+			begin
+				fnd_count = 0;
+				fnd_clock = ~fnd_clock;
+			end
+		else
+			begin
+				fnd_count = fnd_count + 1;
+			end
+	end
+	
+	always @ (posedge fnd_clock)
+	begin
+	//--------------닫힘상태----------------------------------------------------
+		if(display_close)
+		begin
+			if (fnd_state == 0)
+			begin
+				seg_pos = 6'b011111;
+				seg_data = 8'b10011100;
+				fnd_state = 1;
+			end
+			else if	(fnd_state == 1)
+			begin
+				seg_pos = 6'b101111;
+				seg_data = 8'b00011100;
+				fnd_state = 2;
+			end
+			else if	(fnd_state == 2)
+			begin
+				seg_pos = 6'b110111;
+				seg_data = 8'b11111100;
+				fnd_state = 3;
+			end
+			else if	(fnd_state == 3)
+			begin
+				seg_pos = 6'b111011;
+				seg_data = 8'b10110110;
+				fnd_state = 4;
+			end
+			else if	(fnd_state == 4)
+			begin
+				seg_pos = 6'b111101;
+				seg_data = 8'b10011110;
+				fnd_state = 5;
+			end
+			else if	(fnd_state == 5)
+			begin
+				seg_pos = 6'b111110;
+				seg_data = 8'b00000000;
+				fnd_state = 0;
+			end
+		end
+	//--------------열림상태----------------------------------------------------
+		else if(display_open)
+		begin
+			if (fnd_state == 0)
+			begin
+				seg_pos = 6'b011111;
+				seg_data = 8'b11111100;
+				fnd_state = 1;
+			end
+			else if	(fnd_state == 1)
+			begin
+				seg_pos = 6'b101111;
+				seg_data = 8'b11001110;
+				fnd_state = 2;
+			end
+			else if	(fnd_state == 2)
+			begin
+				seg_pos = 6'b110111;
+				seg_data = 8'b10011110;
+				fnd_state = 3;
+			end
+			else if	(fnd_state == 3)
+			begin
+				seg_pos = 6'b111011;
+				seg_data = 8'b11101100;
+				fnd_state = 4;
+			end
+			else if	(fnd_state == 4)
+			begin
+				seg_pos = 6'b111101;
+				seg_data = 8'b00000000;
+				fnd_state = 5;
+			end
+			else if	(fnd_state == 5)
+			begin
+				seg_pos = 6'b111110;
+				seg_data = 8'b00000000;
+				fnd_state = 0;
+			end
+		end
+	//--------------숫자표시----------------------------------------------------
+		else if(display_number)
+		begin
+			case(index)	//인댁스별로 표시 
+		//----------index=0----------------------------------------
+			0:	begin
+				if (fnd_state == 0)
+				begin
+					seg_pos = 6'b011111;
+					seg_data = 8'b00000001;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					seg_pos = 6'b101111;
+					seg_data = 8'b00000000;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					seg_pos = 6'b110111;
+					seg_data = 8'b00000000;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					seg_pos = 6'b111011;
+					seg_data = 8'b00000000;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					seg_pos = 6'b111101;
+					seg_data = 8'b00000000;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000000;
+					fnd_state = 0;
+				end
+			end
+		//----------index=1----------------------------------------
+			1:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					seg_pos = 6'b101111;
+					seg_data = 8'b00000001;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					seg_pos = 6'b110111;
+					seg_data = 8'b00000000;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					seg_pos = 6'b111011;
+					seg_data = 8'b00000000;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					seg_pos = 6'b111101;
+					seg_data = 8'b00000000;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000000;
+					fnd_state = 0;
+				end
+			end
+		//----------index=2----------------------------------------
+			2:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					case(i1)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b101111;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					seg_pos = 6'b110111;
+					seg_data = 8'b00000001;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					seg_pos = 6'b111011;
+					seg_data = 8'b00000000;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					seg_pos = 6'b111101;
+					seg_data = 8'b00000000;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000000;
+					fnd_state = 0;
+				end
+			end
+		//----------index=3----------------------------------------
+			3:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					case(i1)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b101111;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					case(i2)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b110111;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					seg_pos = 6'b111011;
+					seg_data = 8'b00000001;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					seg_pos = 6'b111101;
+					seg_data = 8'b00000000;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000000;
+					fnd_state = 0;
+				end			
+			end
+		//----------index=4----------------------------------------
+			4:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					case(i1)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b101111;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					case(i2)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b110111;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					case(i3)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111011;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					seg_pos = 6'b111101;
+					seg_data = 8'b00000001;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000000;
+					fnd_state = 0;
+				end				
+			end
+		//----------index=5----------------------------------------
+			5:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					case(i1)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b101111;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					case(i2)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b110111;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					case(i3)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111011;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					case(i4)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111101;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					seg_pos = 6'b111110;
+					seg_data = 8'b00000001;
+					fnd_state = 0;
+				end
+			end
+		//----------index=6----------------------------------------
+			6:	begin
+				if (fnd_state == 0)
+				begin
+					case(i0)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b011111;
+					fnd_state = 1;
+				end
+				else if	(fnd_state == 1)
+				begin
+					case(i1)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b101111;
+					fnd_state = 2;
+				end
+				else if	(fnd_state == 2)
+				begin
+					case(i2)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b110111;
+					fnd_state = 3;
+				end
+				else if	(fnd_state == 3)
+				begin
+					case(i3)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111011;
+					fnd_state = 4;
+				end
+				else if	(fnd_state == 4)
+				begin
+					case(i4)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111101;
+					fnd_state = 5;
+				end
+				else if	(fnd_state == 5)
+				begin
+					case(i5)
+					0: seg_data = 8'b11111100;
+					1: seg_data = 8'b01100000;
+					2: seg_data = 8'b11011010;
+					3: seg_data = 8'b11110010;
+					4: seg_data = 8'b01100110;
+					5: seg_data = 8'b10110110;
+					6: seg_data = 8'b10111110;
+					7: seg_data = 8'b11100000;
+					8: seg_data = 8'b11111110;
+					9: seg_data = 8'b11110110;
+					endcase
+					seg_pos = 6'b111110;
+					fnd_state = 0;
+				end			
+			end
+			endcase
+		end
+	//--------------그외----------------------------------------------------
+		else
+		begin
+			if (fnd_state == 0)
+			begin
+				seg_pos = 6'b011111;
+				seg_data = 8'b00000001;
+				fnd_state = 1;
+			end
+			else if	(fnd_state == 1)
+			begin
+				seg_pos = 6'b101111;
+				seg_data = 8'b00000001;
+				fnd_state = 2;
+			end
+			else if	(fnd_state == 2)
+			begin
+				seg_pos = 6'b110111;
+				seg_data = 8'b00000001;
+				fnd_state = 3;
+			end
+			else if	(fnd_state == 3)
+			begin
+				seg_pos = 6'b111011;
+				seg_data = 8'b00000001;
+				fnd_state = 4;
+			end
+			else if	(fnd_state == 4)
+			begin
+				seg_pos = 6'b111101;
+				seg_data = 8'b00000001;
+				fnd_state = 5;
+			end
+			else if	(fnd_state == 5)
+			begin
+				seg_pos = 6'b111110;
+				seg_data = 8'b00000001;
+				fnd_state = 0;
+			end			
+		end
+	end	
+endmodule

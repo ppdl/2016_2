@@ -1,0 +1,1028 @@
+Analysis & Synthesis report for DOOR_LOCK
+Mon Dec 15 23:21:45 2014
+Quartus II 32-bit Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound
+  9. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|pipo_internal_state
+ 10. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|lock_internal_state
+ 11. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|err_internal_state
+ 12. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|open_internal_state
+ 13. State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state
+ 14. State Machine - |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state
+ 15. State Machine - |DOOR_LOCK|KEYPAD_MODULE:module_key|matrix_state
+ 16. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|close_state
+ 17. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|main_state
+ 18. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index
+ 19. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_read_state
+ 20. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|length
+ 21. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_check_state
+ 22. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index2
+ 23. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|password_check_state
+ 24. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|open_state
+ 25. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|fail_state
+ 26. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|pipo_state
+ 27. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|lock_state
+ 28. State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|one_minute_lock_state
+ 29. User-Specified and Inferred Latches
+ 30. Registers Removed During Synthesis
+ 31. Removed Registers Triggering Further Register Optimizations
+ 32. General Register Statistics
+ 33. Inverted Register Statistics
+ 34. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 35. Port Connectivity Checks: "SOUND_GENERATOR_WITH_BUZZER:buzzerM|COUNTER_FOR_FIFTEN_SEC:cffs"
+ 36. Elapsed Time Per Partition
+ 37. Analysis & Synthesis Messages
+ 38. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Dec 15 23:21:44 2014      ;
+; Quartus II 32-bit Version          ; 13.0.0 Build 156 04/24/2013 SJ Web Edition ;
+; Revision Name                      ; DOOR_LOCK                                  ;
+; Top-level Entity Name              ; DOOR_LOCK                                  ;
+; Family                             ; Cyclone II                                 ;
+; Total logic elements               ; 1,495                                      ;
+;     Total combinational functions  ; 1,400                                      ;
+;     Dedicated logic registers      ; 696                                        ;
+; Total registers                    ; 696                                        ;
+; Total pins                         ; 34                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C8F256C8        ;                    ;
+; Top-level entity name                                                      ; DOOR_LOCK          ; DOOR_LOCK          ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                    ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                      ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------+---------+
+; COUNTER_FOR_SHORT_TIME.v         ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_SHORT_TIME.v      ;         ;
+; COUNTER_FOR_FIFTEN_SEC.v         ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_FIFTEN_SEC.v      ;         ;
+; COUNTER_FOR_TIME_T.v             ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_TIME_T.v          ;         ;
+; LED_OUTPUT_CONTROLLER.v          ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/LED_OUTPUT_CONTROLLER.v       ;         ;
+; DOOR_LOCK.v                      ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/DOOR_LOCK.v                   ;         ;
+; KEYPAD_MODULE.v                  ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/KEYPAD_MODULE.v               ;         ;
+; MAIN_FSM.v                       ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/MAIN_FSM.v                    ;         ;
+; COUNTER_FOR_TIME_TO_CLOSE.v      ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_TIME_TO_CLOSE.v   ;         ;
+; COUNTER_FOR_TIME_FOR_FAIL.v      ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_TIME_FOR_FAIL.v   ;         ;
+; COUNTER_FOR_TIME_ONE_MINUTE.v    ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/COUNTER_FOR_TIME_ONE_MINUTE.v ;         ;
+; SEVEN_SEGMENT_CONTROLLER.v       ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/SEVEN_SEGMENT_CONTROLLER.v    ;         ;
+; SOUND_GENERATOR_WITH_BUZZER.v    ; yes             ; User Verilog HDL File  ; C:/altera/DOOR_LOCK/SOUND_GENERATOR_WITH_BUZZER.v ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 1,495 ;
+;                                             ;       ;
+; Total combinational functions               ; 1400  ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 695   ;
+;     -- 3 input functions                    ; 204   ;
+;     -- <=2 input functions                  ; 501   ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 1082  ;
+;     -- arithmetic mode                      ; 318   ;
+;                                             ;       ;
+; Total registers                             ; 696   ;
+;     -- Dedicated logic registers            ; 696   ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 34    ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 658   ;
+; Total fan-out                               ; 6589  ;
+; Average fan-out                             ; 3.09  ;
++---------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                               ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                        ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+--------------+
+; |DOOR_LOCK                                ; 1400 (0)          ; 696 (0)      ; 0           ; 0            ; 0       ; 0         ; 34   ; 0            ; |DOOR_LOCK                                                                 ;              ;
+;    |KEYPAD_MODULE:module_key|             ; 120 (120)         ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|KEYPAD_MODULE:module_key                                        ;              ;
+;    |LED_OUTPUT_CONTROLLER:led_control|    ; 188 (76)          ; 66 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|LED_OUTPUT_CONTROLLER:led_control                               ;              ;
+;       |COUNTER_FOR_TIME_T:cftt1|          ; 56 (56)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1      ;              ;
+;       |COUNTER_FOR_TIME_T:cftt2|          ; 56 (56)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2      ;              ;
+;    |MAIN_FSM:main_machin|                 ; 733 (499)         ; 409 (264)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|MAIN_FSM:main_machin                                            ;              ;
+;       |COUNTER_FOR_TIME_FOR_FAIL:cftff|   ; 101 (101)         ; 65 (65)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|MAIN_FSM:main_machin|COUNTER_FOR_TIME_FOR_FAIL:cftff            ;              ;
+;       |COUNTER_FOR_TIME_ONE_MINUTE:cftom| ; 71 (71)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|MAIN_FSM:main_machin|COUNTER_FOR_TIME_ONE_MINUTE:cftom          ;              ;
+;       |COUNTER_FOR_TIME_TO_CLOSE:cfttc|   ; 62 (62)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|MAIN_FSM:main_machin|COUNTER_FOR_TIME_TO_CLOSE:cfttc            ;              ;
+;    |SEVEN_SEGMENT_CONTROLLER:sevenM|      ; 104 (104)         ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM                                 ;              ;
+;    |SOUND_GENERATOR_WITH_BUZZER:buzzerM|  ; 255 (197)         ; 106 (72)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM                             ;              ;
+;       |COUNTER_FOR_SHORT_TIME:cfst|       ; 58 (58)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|COUNTER_FOR_SHORT_TIME:cfst ;              ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound                                                                                      ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; Name       ; sound.1010 ; sound.1001 ; sound.1000 ; sound.0111 ; sound.0110 ; sound.0101 ; sound.0100 ; sound.0011 ; sound.0010 ; sound.0001 ; sound.0000 ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; sound.0000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; sound.0001 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
+; sound.0010 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; sound.0011 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; sound.0100 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; sound.0101 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; sound.0110 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; sound.0111 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; sound.1000 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; sound.1001 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; sound.1010 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|pipo_internal_state                                         ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+; Name                   ; pipo_internal_state.11 ; pipo_internal_state.10 ; pipo_internal_state.01 ; pipo_internal_state.00 ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+; pipo_internal_state.00 ; 0                      ; 0                      ; 0                      ; 0                      ;
+; pipo_internal_state.01 ; 0                      ; 0                      ; 1                      ; 1                      ;
+; pipo_internal_state.10 ; 0                      ; 1                      ; 0                      ; 1                      ;
+; pipo_internal_state.11 ; 1                      ; 0                      ; 0                      ; 1                      ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|lock_internal_state                                         ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+; Name                   ; lock_internal_state.11 ; lock_internal_state.10 ; lock_internal_state.01 ; lock_internal_state.00 ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+; lock_internal_state.00 ; 0                      ; 0                      ; 0                      ; 0                      ;
+; lock_internal_state.01 ; 0                      ; 0                      ; 1                      ; 1                      ;
+; lock_internal_state.10 ; 0                      ; 1                      ; 0                      ; 1                      ;
+; lock_internal_state.11 ; 1                      ; 0                      ; 0                      ; 1                      ;
++------------------------+------------------------+------------------------+------------------------+------------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|err_internal_state             ;
++-----------------------+-----------------------+-----------------------+-----------------------+
+; Name                  ; err_internal_state.00 ; err_internal_state.10 ; err_internal_state.01 ;
++-----------------------+-----------------------+-----------------------+-----------------------+
+; err_internal_state.00 ; 0                     ; 0                     ; 0                     ;
+; err_internal_state.01 ; 1                     ; 0                     ; 1                     ;
+; err_internal_state.10 ; 1                     ; 1                     ; 0                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|open_internal_state                ;
++------------------------+------------------------+------------------------+------------------------+
+; Name                   ; open_internal_state.00 ; open_internal_state.10 ; open_internal_state.01 ;
++------------------------+------------------------+------------------------+------------------------+
+; open_internal_state.00 ; 0                      ; 0                      ; 0                      ;
+; open_internal_state.01 ; 1                      ; 0                      ; 1                      ;
+; open_internal_state.10 ; 1                      ; 1                      ; 0                      ;
++------------------------+------------------------+------------------------+------------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state                                                                                                                   ;
++-------------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+--------------------------+-------------------+
+; Name                          ; internal_state.STATE_PIPOPIPO ; internal_state.STATE_LOCK ; internal_state.STATE_ERR ; internal_state.STATE_OPEN ; internal_state.STATE_KEY ; internal_state.S0 ;
++-------------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+--------------------------+-------------------+
+; internal_state.S0             ; 0                             ; 0                         ; 0                        ; 0                         ; 0                        ; 0                 ;
+; internal_state.STATE_KEY      ; 0                             ; 0                         ; 0                        ; 0                         ; 1                        ; 1                 ;
+; internal_state.STATE_OPEN     ; 0                             ; 0                         ; 0                        ; 1                         ; 0                        ; 1                 ;
+; internal_state.STATE_ERR      ; 0                             ; 0                         ; 1                        ; 0                         ; 0                        ; 1                 ;
+; internal_state.STATE_LOCK     ; 0                             ; 1                         ; 0                        ; 0                         ; 0                        ; 1                 ;
+; internal_state.STATE_PIPOPIPO ; 1                             ; 0                         ; 0                        ; 0                         ; 0                        ; 1                 ;
++-------------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+--------------------------+-------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state                                          ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; Name          ; fnd_state.101 ; fnd_state.100 ; fnd_state.011 ; fnd_state.010 ; fnd_state.001 ; fnd_state.000 ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+; fnd_state.000 ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
+; fnd_state.001 ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
+; fnd_state.010 ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
+; fnd_state.011 ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
+; fnd_state.100 ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
+; fnd_state.101 ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|KEYPAD_MODULE:module_key|matrix_state                        ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+; Name            ; matrix_state.11 ; matrix_state.10 ; matrix_state.00 ; matrix_state.01 ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+; matrix_state.01 ; 0               ; 0               ; 0               ; 0               ;
+; matrix_state.00 ; 0               ; 0               ; 1               ; 1               ;
+; matrix_state.10 ; 0               ; 1               ; 0               ; 1               ;
+; matrix_state.11 ; 1               ; 0               ; 0               ; 1               ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|close_state                            ;
++----------------------+----------------------+-------------------+----------------------+
+; Name                 ; close_state.CS_WAIT1 ; close_state.CS_OK ; close_state.CS_WAIT2 ;
++----------------------+----------------------+-------------------+----------------------+
+; close_state.CS_WAIT1 ; 0                    ; 0                 ; 0                    ;
+; close_state.CS_WAIT2 ; 1                    ; 0                 ; 1                    ;
+; close_state.CS_OK    ; 1                    ; 1                 ; 0                    ;
++----------------------+----------------------+-------------------+----------------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|main_state                                                                                                                                                                                       ;
++----------------------------+-----------------+----------------------------+-----------------+---------------------------+--------------------+------------------+-----------------+-----------------+----------------------+---------------------+
+; Name                       ; main_state.OPEN ; main_state.ONE_MINUTE_LOCK ; main_state.LOCK ; main_state.PASSWORD_CHECK ; main_state.PRE_SET ; main_state.CLOSE ; main_state.PIPO ; main_state.FAIL ; main_state.SET_CHECK ; main_state.SET_READ ;
++----------------------------+-----------------+----------------------------+-----------------+---------------------------+--------------------+------------------+-----------------+-----------------+----------------------+---------------------+
+; main_state.SET_READ        ; 0               ; 0                          ; 0               ; 0                         ; 0                  ; 0                ; 0               ; 0               ; 0                    ; 0                   ;
+; main_state.SET_CHECK       ; 0               ; 0                          ; 0               ; 0                         ; 0                  ; 0                ; 0               ; 0               ; 1                    ; 1                   ;
+; main_state.FAIL            ; 0               ; 0                          ; 0               ; 0                         ; 0                  ; 0                ; 0               ; 1               ; 0                    ; 1                   ;
+; main_state.PIPO            ; 0               ; 0                          ; 0               ; 0                         ; 0                  ; 0                ; 1               ; 0               ; 0                    ; 1                   ;
+; main_state.CLOSE           ; 0               ; 0                          ; 0               ; 0                         ; 0                  ; 1                ; 0               ; 0               ; 0                    ; 1                   ;
+; main_state.PRE_SET         ; 0               ; 0                          ; 0               ; 0                         ; 1                  ; 0                ; 0               ; 0               ; 0                    ; 1                   ;
+; main_state.PASSWORD_CHECK  ; 0               ; 0                          ; 0               ; 1                         ; 0                  ; 0                ; 0               ; 0               ; 0                    ; 1                   ;
+; main_state.LOCK            ; 0               ; 0                          ; 1               ; 0                         ; 0                  ; 0                ; 0               ; 0               ; 0                    ; 1                   ;
+; main_state.ONE_MINUTE_LOCK ; 0               ; 1                          ; 0               ; 0                         ; 0                  ; 0                ; 0               ; 0               ; 0                    ; 1                   ;
+; main_state.OPEN            ; 1               ; 0                          ; 0               ; 0                         ; 0                  ; 0                ; 0               ; 0               ; 0                    ; 1                   ;
++----------------------------+-----------------+----------------------------+-----------------+---------------------------+--------------------+------------------+-----------------+-----------------+----------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index                                                     ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+; Name      ; index.111 ; index.110 ; index.101 ; index.100 ; index.011 ; index.010 ; index.001 ; index.000 ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+; index.000 ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ;
+; index.001 ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ; 1         ;
+; index.010 ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ; 0         ; 1         ;
+; index.011 ; 0         ; 0         ; 0         ; 0         ; 1         ; 0         ; 0         ; 1         ;
+; index.100 ; 0         ; 0         ; 0         ; 1         ; 0         ; 0         ; 0         ; 1         ;
+; index.101 ; 0         ; 0         ; 1         ; 0         ; 0         ; 0         ; 0         ; 1         ;
+; index.110 ; 0         ; 1         ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ;
+; index.111 ; 1         ; 0         ; 0         ; 0         ; 0         ; 0         ; 0         ; 1         ;
++-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_read_state                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
++------------------------------+---------------------------+------------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+--------------------------+--------------------------+--------------------------+
+; Name                         ; set_read_state.SRS_FINISH ; set_read_state.SRS_OVER_FLOW ; set_read_state.SRS_I6 ; set_read_state.SRS_WAIT5 ; set_read_state.SRS_I5 ; set_read_state.SRS_WAIT4 ; set_read_state.SRS_I4 ; set_read_state.SRS_WAIT3 ; set_read_state.SRS_I3 ; set_read_state.SRS_WAIT2 ; set_read_state.SRS_I2 ; set_read_state.SRS_WAIT1 ; set_read_state.SRS_I1 ; set_read_state.SRS_WAIT0 ; set_read_state.SRS_I0 ; set_read_state.SRS_IDLE3 ; set_read_state.SRS_IDLE2 ; set_read_state.SRS_IDLE1 ; set_read_state.SRS_IDLE0 ;
++------------------------------+---------------------------+------------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+--------------------------+--------------------------+--------------------------+
+; set_read_state.SRS_IDLE0     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 0                        ;
+; set_read_state.SRS_IDLE1     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 1                        ; 1                        ;
+; set_read_state.SRS_IDLE2     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 1                        ; 0                        ; 1                        ;
+; set_read_state.SRS_IDLE3     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 1                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I0        ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 1                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT0     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 1                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I1        ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 1                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT1     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 1                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I2        ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 1                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT2     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 1                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I3        ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 1                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT3     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 1                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I4        ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 1                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT4     ; 0                         ; 0                            ; 0                     ; 0                        ; 0                     ; 1                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I5        ; 0                         ; 0                            ; 0                     ; 0                        ; 1                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_WAIT5     ; 0                         ; 0                            ; 0                     ; 1                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_I6        ; 0                         ; 0                            ; 1                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_OVER_FLOW ; 0                         ; 1                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
+; set_read_state.SRS_FINISH    ; 1                         ; 0                            ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                     ; 0                        ; 0                        ; 0                        ; 1                        ;
++------------------------------+---------------------------+------------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+-----------------------+--------------------------+--------------------------+--------------------------+--------------------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|length                                                             ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; Name       ; length.111 ; length.110 ; length.101 ; length.100 ; length.011 ; length.010 ; length.001 ; length.000 ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+; length.000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; length.001 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
+; length.010 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; length.011 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; length.100 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; length.101 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; length.110 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; length.111 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+------------+------------+------------+------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|set_check_state                                                                                                                                                                                                                                                                                                       ;
++----------------------------+-------------------------+------------------------+----------------------------+----------------------------+----------------------------+----------------------------+-------------------------+-------------------------+---------------------------+---------------------------+---------------------------+---------------------------+
+; Name                       ; set_check_state.SCS_ERR ; set_check_state.SCS_OK ; set_check_state.SCS_INDEX6 ; set_check_state.SCS_INDEX5 ; set_check_state.SCS_INDEX4 ; set_check_state.SCS_INDEX3 ; set_check_state.SCS_DIV ; set_check_state.SCS_PRE ; set_check_state.SCS_IDLE3 ; set_check_state.SCS_IDLE2 ; set_check_state.SCS_IDLE1 ; set_check_state.SCS_IDLE0 ;
++----------------------------+-------------------------+------------------------+----------------------------+----------------------------+----------------------------+----------------------------+-------------------------+-------------------------+---------------------------+---------------------------+---------------------------+---------------------------+
+; set_check_state.SCS_IDLE0  ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 0                         ;
+; set_check_state.SCS_IDLE1  ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 1                         ; 1                         ;
+; set_check_state.SCS_IDLE2  ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 1                         ; 0                         ; 1                         ;
+; set_check_state.SCS_IDLE3  ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 1                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_PRE    ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 1                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_DIV    ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 1                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_INDEX3 ; 0                       ; 0                      ; 0                          ; 0                          ; 0                          ; 1                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_INDEX4 ; 0                       ; 0                      ; 0                          ; 0                          ; 1                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_INDEX5 ; 0                       ; 0                      ; 0                          ; 1                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_INDEX6 ; 0                       ; 0                      ; 1                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_OK     ; 0                       ; 1                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
+; set_check_state.SCS_ERR    ; 1                       ; 0                      ; 0                          ; 0                          ; 0                          ; 0                          ; 0                       ; 0                       ; 0                         ; 0                         ; 0                         ; 1                         ;
++----------------------------+-------------------------+------------------------+----------------------------+----------------------------+----------------------------+----------------------------+-------------------------+-------------------------+---------------------------+---------------------------+---------------------------+---------------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|index2                                                ;
++------------+------------+------------+------------+------------+------------+------------+------------+
+; Name       ; index2.110 ; index2.101 ; index2.100 ; index2.011 ; index2.010 ; index2.001 ; index2.000 ;
++------------+------------+------------+------------+------------+------------+------------+------------+
+; index2.000 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ;
+; index2.001 ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ; 1          ;
+; index2.010 ; 0          ; 0          ; 0          ; 0          ; 1          ; 0          ; 1          ;
+; index2.011 ; 0          ; 0          ; 0          ; 1          ; 0          ; 0          ; 1          ;
+; index2.100 ; 0          ; 0          ; 1          ; 0          ; 0          ; 0          ; 1          ;
+; index2.101 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 1          ;
+; index2.110 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
++------------+------------+------------+------------+------------+------------+------------+------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|password_check_state                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
++--------------------------------+-----------------------------+------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+; Name                           ; password_check_state.PCS_OK ; password_check_state.PCS_ERR ; password_check_state.PCS_PRE6 ; password_check_state.PCS_PRE5 ; password_check_state.PCS_PRE4 ; password_check_state.PCS_PRE3 ; password_check_state.PCS_I6 ; password_check_state.PCS_WAIT5 ; password_check_state.PCS_I5 ; password_check_state.PCS_WAIT4 ; password_check_state.PCS_I4 ; password_check_state.PCS_WAIT3 ; password_check_state.PCS_I3 ; password_check_state.PCS_WAIT2 ; password_check_state.PCS_I2 ; password_check_state.PCS_WAIT1 ; password_check_state.PCS_I1 ; password_check_state.PCS_WAIT0 ; password_check_state.PCS_I0 ; password_check_state.PCS_IDLE3 ; password_check_state.PCS_IDLE2 ; password_check_state.PCS_IDLE1 ; password_check_state.PCS_IDLE0 ;
++--------------------------------+-----------------------------+------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+; password_check_state.PCS_IDLE0 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 0                              ;
+; password_check_state.PCS_IDLE1 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 1                              ; 1                              ;
+; password_check_state.PCS_IDLE2 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 1                              ; 0                              ; 1                              ;
+; password_check_state.PCS_IDLE3 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 1                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I0    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 1                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT0 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 1                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I1    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 1                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT1 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 1                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I2    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 1                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT2 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 1                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I3    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 1                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT3 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 1                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I4    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 1                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT4 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 1                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I5    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 1                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_WAIT5 ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 1                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_I6    ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 1                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_PRE3  ; 0                           ; 0                            ; 0                             ; 0                             ; 0                             ; 1                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_PRE4  ; 0                           ; 0                            ; 0                             ; 0                             ; 1                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_PRE5  ; 0                           ; 0                            ; 0                             ; 1                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_PRE6  ; 0                           ; 0                            ; 1                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_ERR   ; 0                           ; 1                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
+; password_check_state.PCS_OK    ; 1                           ; 0                            ; 0                             ; 0                             ; 0                             ; 0                             ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                           ; 0                              ; 0                              ; 0                              ; 1                              ;
++--------------------------------+-----------------------------+------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+-----------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|open_state                                                                                                                                ;
++-------------------------+---------------------+-------------------------+-------------------------+---------------------+---------------------+---------------------+---------------------+
+; Name                    ; open_state.OS_CLOSE ; open_state.OS_TIME_WAIL ; open_state.OS_DOOR_WAIT ; open_state.OS_IDLE3 ; open_state.OS_IDLE2 ; open_state.OS_IDLE1 ; open_state.OS_IDLE0 ;
++-------------------------+---------------------+-------------------------+-------------------------+---------------------+---------------------+---------------------+---------------------+
+; open_state.OS_IDLE0     ; 0                   ; 0                       ; 0                       ; 0                   ; 0                   ; 0                   ; 0                   ;
+; open_state.OS_IDLE1     ; 0                   ; 0                       ; 0                       ; 0                   ; 0                   ; 1                   ; 1                   ;
+; open_state.OS_IDLE2     ; 0                   ; 0                       ; 0                       ; 0                   ; 1                   ; 0                   ; 1                   ;
+; open_state.OS_IDLE3     ; 0                   ; 0                       ; 0                       ; 1                   ; 0                   ; 0                   ; 1                   ;
+; open_state.OS_DOOR_WAIT ; 0                   ; 0                       ; 1                       ; 0                   ; 0                   ; 0                   ; 1                   ;
+; open_state.OS_TIME_WAIL ; 0                   ; 1                       ; 0                       ; 0                   ; 0                   ; 0                   ; 1                   ;
+; open_state.OS_CLOSE     ; 1                   ; 0                       ; 0                       ; 0                   ; 0                   ; 0                   ; 1                   ;
++-------------------------+---------------------+-------------------------+-------------------------+---------------------+---------------------+---------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|fail_state                                                                                                                                                             ;
++----------------------------+--------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+; Name                       ; fail_state.FS_PIPO ; fail_state.FS_RETURN ; fail_state.FS_NUMBER_CHECK ; fail_state.FS_TIME_CHECK ; fail_state.FS_IDLE3 ; fail_state.FS_IDLE2 ; fail_state.FS_IDLE1 ; fail_state.FS_IDLE0 ;
++----------------------------+--------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+; fail_state.FS_IDLE0        ; 0                  ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 0                   ;
+; fail_state.FS_IDLE1        ; 0                  ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 1                   ; 1                   ;
+; fail_state.FS_IDLE2        ; 0                  ; 0                    ; 0                          ; 0                        ; 0                   ; 1                   ; 0                   ; 1                   ;
+; fail_state.FS_IDLE3        ; 0                  ; 0                    ; 0                          ; 0                        ; 1                   ; 0                   ; 0                   ; 1                   ;
+; fail_state.FS_TIME_CHECK   ; 0                  ; 0                    ; 0                          ; 1                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; fail_state.FS_NUMBER_CHECK ; 0                  ; 0                    ; 1                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; fail_state.FS_RETURN       ; 0                  ; 1                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; fail_state.FS_PIPO         ; 1                  ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
++----------------------------+--------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|pipo_state                                                                                         ;
++---------------------+-------------------+------------------+---------------------+---------------------+---------------------+---------------------+
+; Name                ; pipo_state.PS_OFF ; pipo_state.PS_ON ; pipo_state.PS_IDLE3 ; pipo_state.PS_IDLE2 ; pipo_state.PS_IDLE1 ; pipo_state.PS_IDLE0 ;
++---------------------+-------------------+------------------+---------------------+---------------------+---------------------+---------------------+
+; pipo_state.PS_IDLE0 ; 0                 ; 0                ; 0                   ; 0                   ; 0                   ; 0                   ;
+; pipo_state.PS_IDLE1 ; 0                 ; 0                ; 0                   ; 0                   ; 1                   ; 1                   ;
+; pipo_state.PS_IDLE2 ; 0                 ; 0                ; 0                   ; 1                   ; 0                   ; 1                   ;
+; pipo_state.PS_IDLE3 ; 0                 ; 0                ; 1                   ; 0                   ; 0                   ; 1                   ;
+; pipo_state.PS_ON    ; 0                 ; 1                ; 0                   ; 0                   ; 0                   ; 1                   ;
+; pipo_state.PS_OFF   ; 1                 ; 0                ; 0                   ; 0                   ; 0                   ; 1                   ;
++---------------------+-------------------+------------------+---------------------+---------------------+---------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|lock_state                                                                                                                                                                           ;
++-------------------------------+-------------------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+; Name                          ; lock_state.LS_ONE_MINUTE_LOCK ; lock_state.LS_RETURN ; lock_state.LS_NUMBER_CHECK ; lock_state.LS_TIME_CHECK ; lock_state.LS_IDLE3 ; lock_state.LS_IDLE2 ; lock_state.LS_IDLE1 ; lock_state.LS_IDLE0 ;
++-------------------------------+-------------------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+; lock_state.LS_IDLE0           ; 0                             ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 0                   ;
+; lock_state.LS_IDLE1           ; 0                             ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 1                   ; 1                   ;
+; lock_state.LS_IDLE2           ; 0                             ; 0                    ; 0                          ; 0                        ; 0                   ; 1                   ; 0                   ; 1                   ;
+; lock_state.LS_IDLE3           ; 0                             ; 0                    ; 0                          ; 0                        ; 1                   ; 0                   ; 0                   ; 1                   ;
+; lock_state.LS_TIME_CHECK      ; 0                             ; 0                    ; 0                          ; 1                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; lock_state.LS_NUMBER_CHECK    ; 0                             ; 0                    ; 1                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; lock_state.LS_RETURN          ; 0                             ; 1                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
+; lock_state.LS_ONE_MINUTE_LOCK ; 1                             ; 0                    ; 0                          ; 0                        ; 0                   ; 0                   ; 0                   ; 1                   ;
++-------------------------------+-------------------------------+----------------------+----------------------------+--------------------------+---------------------+---------------------+---------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DOOR_LOCK|MAIN_FSM:main_machin|one_minute_lock_state                                                                                                                                                                           ;
++----------------------------------+--------------------------------+---------------------------------+----------------------------------+----------------------------------+----------------------------------+----------------------------------+
+; Name                             ; one_minute_lock_state.OMLS_OFF ; one_minute_lock_state.OMLS_LOCK ; one_minute_lock_state.OMLS_IDLE3 ; one_minute_lock_state.OMLS_IDLE2 ; one_minute_lock_state.OMLS_IDLE1 ; one_minute_lock_state.OMLS_IDLE0 ;
++----------------------------------+--------------------------------+---------------------------------+----------------------------------+----------------------------------+----------------------------------+----------------------------------+
+; one_minute_lock_state.OMLS_IDLE0 ; 0                              ; 0                               ; 0                                ; 0                                ; 0                                ; 0                                ;
+; one_minute_lock_state.OMLS_IDLE1 ; 0                              ; 0                               ; 0                                ; 0                                ; 1                                ; 1                                ;
+; one_minute_lock_state.OMLS_IDLE2 ; 0                              ; 0                               ; 0                                ; 1                                ; 0                                ; 1                                ;
+; one_minute_lock_state.OMLS_IDLE3 ; 0                              ; 0                               ; 1                                ; 0                                ; 0                                ; 1                                ;
+; one_minute_lock_state.OMLS_LOCK  ; 0                              ; 1                               ; 0                                ; 0                                ; 0                                ; 1                                ;
+; one_minute_lock_state.OMLS_OFF   ; 1                              ; 0                               ; 0                                ; 0                                ; 0                                ; 1                                ;
++----------------------------------+--------------------------------+---------------------------------+----------------------------------+----------------------------------+----------------------------------+----------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                                           ;
++-------------------------------------------------------------+--------------------------------------------------------+------------------------+
+; Latch Name                                                  ; Latch Enable Signal                                    ; Free of Timing Hazards ;
++-------------------------------------------------------------+--------------------------------------------------------+------------------------+
+; LED_OUTPUT_CONTROLLER:led_control|led[7]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[6]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[5]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[4]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[3]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[2]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[1]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led[0]                    ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.10001_1742 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01000_2165 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010_1695 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.10000_1789 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01111_1836 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01110_1883 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01101_1930 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01100_1977 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01011_2024 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01010_2071 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.01001_2118 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00111_2212 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00110_2259 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00101_2306 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00100_2353 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00011_2400 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00010_2447 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00001_2494 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|internal_state.00000_2541 ; LED_OUTPUT_CONTROLLER:led_control|internal_state.10010 ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|reset_time_t2             ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|reset_time_t1             ; LED_OUTPUT_CONTROLLER:led_control|Selector31           ; yes                    ;
+; LED_OUTPUT_CONTROLLER:led_control|led_end                   ; LED_OUTPUT_CONTROLLER:led_control|Selector28           ; yes                    ;
+; Number of user-specified and inferred latches = 30          ;                                                        ;                        ;
++-------------------------------------------------------------+--------------------------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++----------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                 ;
++-----------------------------------------------------------+----------------------------------------+
+; Register name                                             ; Reason for Removal                     ;
++-----------------------------------------------------------+----------------------------------------+
+; SEVEN_SEGMENT_CONTROLLER:sevenM|temp_seg[0]               ; Stuck at GND due to stuck port data_in ;
+; SEVEN_SEGMENT_CONTROLLER:sevenM|seg_data[0]               ; Stuck at GND due to stuck port data_in ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound~13              ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound~14              ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound~15              ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|sound~16              ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|pipo_internal_state~6 ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|pipo_internal_state~7 ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|lock_internal_state~6 ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|lock_internal_state~7 ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state~8      ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state~9      ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state~10     ; Lost fanout                            ;
+; SOUND_GENERATOR_WITH_BUZZER:buzzerM|internal_state~11     ; Lost fanout                            ;
+; SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state~2               ; Lost fanout                            ;
+; SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state~3               ; Lost fanout                            ;
+; SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state~4               ; Lost fanout                            ;
+; KEYPAD_MODULE:module_key|matrix_state~2                   ; Lost fanout                            ;
+; KEYPAD_MODULE:module_key|matrix_state~3                   ; Lost fanout                            ;
+; MAIN_FSM:main_machin|main_state~4                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|main_state~5                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|main_state~6                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|main_state~7                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index~2                              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index~3                              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index~4                              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_read_state~21                    ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_read_state~22                    ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_read_state~23                    ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_read_state~24                    ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_read_state~25                    ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length~15                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length~16                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length~17                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_check_state~17                   ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_check_state~18                   ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_check_state~19                   ; Lost fanout                            ;
+; MAIN_FSM:main_machin|set_check_state~20                   ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index2~9                             ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index2~10                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index2~11                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|password_check_state~25              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|password_check_state~26              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|password_check_state~27              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|password_check_state~28              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|password_check_state~29              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|open_state~9                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|open_state~10                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|open_state~11                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|fail_state~10                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|fail_state~11                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|fail_state~12                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|pipo_state~8                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|pipo_state~9                         ; Lost fanout                            ;
+; MAIN_FSM:main_machin|pipo_state~10                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|lock_state~10                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|lock_state~11                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|lock_state~12                        ; Lost fanout                            ;
+; MAIN_FSM:main_machin|one_minute_lock_state~8              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|one_minute_lock_state~9              ; Lost fanout                            ;
+; MAIN_FSM:main_machin|one_minute_lock_state~10             ; Lost fanout                            ;
+; MAIN_FSM:main_machin|close_state.CS_WAIT1                 ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index.000                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index.111                            ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length.000                           ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length.001                           ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length.010                           ; Lost fanout                            ;
+; MAIN_FSM:main_machin|length.111                           ; Lost fanout                            ;
+; MAIN_FSM:main_machin|index2.000                           ; Lost fanout                            ;
+; Total Number of Removed Registers = 69                    ;                                        ;
++-----------------------------------------------------------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                ;
++---------------------------------------------+---------------------------+------------------------------------------------------------------+
+; Register name                               ; Reason for Removal        ; Registers Removed due to This Register                           ;
++---------------------------------------------+---------------------------+------------------------------------------------------------------+
+; MAIN_FSM:main_machin|length~15              ; Lost Fanouts              ; MAIN_FSM:main_machin|length.001, MAIN_FSM:main_machin|length.111 ;
+; SEVEN_SEGMENT_CONTROLLER:sevenM|temp_seg[0] ; Stuck at GND              ; SEVEN_SEGMENT_CONTROLLER:sevenM|seg_data[0]                      ;
+;                                             ; due to stuck port data_in ;                                                                  ;
+; MAIN_FSM:main_machin|index~2                ; Lost Fanouts              ; MAIN_FSM:main_machin|index.111                                   ;
+; MAIN_FSM:main_machin|length~16              ; Lost Fanouts              ; MAIN_FSM:main_machin|length.010                                  ;
++---------------------------------------------+---------------------------+------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 696   ;
+; Number of registers using Synchronous Clear  ; 83    ;
+; Number of registers using Synchronous Load   ; 9     ;
+; Number of registers using Asynchronous Clear ; 245   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 456   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------+
+; Inverted Register Statistics                         ;
++--------------------------------------------+---------+
+; Inverted Register                          ; Fan out ;
++--------------------------------------------+---------+
+; KEYPAD_MODULE:module_key|key_col[0]        ; 2       ;
+; KEYPAD_MODULE:module_key|time_key          ; 2       ;
+; KEYPAD_MODULE:module_key|m_sec             ; 7       ;
+; MAIN_FSM:main_machin|new                   ; 2       ;
+; MAIN_FSM:main_machin|reset_time_for_fail   ; 66      ;
+; MAIN_FSM:main_machin|reset_time_one_minute ; 44      ;
+; Total number of inverted registers = 6     ;         ;
++--------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|number_of_lock[0]                  ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |DOOR_LOCK|KEYPAD_MODULE:module_key|count_m_sec[15]                ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|number_of_fail[1]                  ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; Yes        ; |DOOR_LOCK|KEYPAD_MODULE:module_key|key_col[1]                     ;
+; 16:1               ; 7 bits    ; 70 LEs        ; 42 LEs               ; 28 LEs                 ; Yes        ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|temp_seg[2]             ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i0[3]                              ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|temp_num[0]             ;
+; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; Yes        ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|seg_pos[0]              ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i1[2]                              ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i2[3]                              ;
+; 11:1               ; 4 bits    ; 28 LEs        ; 4 LEs                ; 24 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i3[2]                              ;
+; 13:1               ; 4 bits    ; 32 LEs        ; 4 LEs                ; 28 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i4[3]                              ;
+; 15:1               ; 4 bits    ; 40 LEs        ; 4 LEs                ; 36 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|i5[3]                              ;
+; 17:1               ; 3 bits    ; 33 LEs        ; 15 LEs               ; 18 LEs                 ; Yes        ; |DOOR_LOCK|MAIN_FSM:main_machin|display_state[0]                   ;
+; 22:1               ; 32 bits   ; 448 LEs       ; 32 LEs               ; 416 LEs                ; Yes        ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|count_for_sound[17] ;
+; 37:1               ; 2 bits    ; 48 LEs        ; 18 LEs               ; 30 LEs                 ; Yes        ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|seg_data[1]             ;
+; 38:1               ; 3 bits    ; 75 LEs        ; 24 LEs               ; 51 LEs                 ; Yes        ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|seg_data[7]             ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; No         ; |DOOR_LOCK|MAIN_FSM:main_machin|length                             ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |DOOR_LOCK|KEYPAD_MODULE:module_key|count_time_key                 ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; No         ; |DOOR_LOCK|KEYPAD_MODULE:module_key|matrix_state                   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|Selector22          ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|Selector21          ;
+; 8:1                ; 5 bits    ; 25 LEs        ; 20 LEs               ; 5 LEs                  ; No         ; |DOOR_LOCK|SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_state               ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; No         ; |DOOR_LOCK|MAIN_FSM:main_machin|close_state                        ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |DOOR_LOCK|MAIN_FSM:main_machin|index                              ;
+; 14:1               ; 6 bits    ; 54 LEs        ; 24 LEs               ; 30 LEs                 ; No         ; |DOOR_LOCK|SOUND_GENERATOR_WITH_BUZZER:buzzerM|Selector29          ;
+; 18:1               ; 3 bits    ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; No         ; |DOOR_LOCK|MAIN_FSM:main_machin|Selector120                        ;
+; 21:1               ; 2 bits    ; 28 LEs        ; 10 LEs               ; 18 LEs                 ; No         ; |DOOR_LOCK|MAIN_FSM:main_machin|Selector126                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SOUND_GENERATOR_WITH_BUZZER:buzzerM|COUNTER_FOR_FIFTEN_SEC:cffs"                    ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; t    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:21     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 32-bit Analysis & Synthesis
+    Info: Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
+    Info: Processing started: Mon Dec 15 23:21:16 2014
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DOOR_LOCK -c DOOR_LOCK
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_short_time.v
+    Info (12023): Found entity 1: COUNTER_FOR_SHORT_TIME
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_fiften_sec.v
+    Info (12023): Found entity 1: COUNTER_FOR_FIFTEN_SEC
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_time_t.v
+    Info (12023): Found entity 1: COUNTER_FOR_TIME_T
+Info (12021): Found 1 design units, including 1 entities, in source file led_output_controller.v
+    Info (12023): Found entity 1: LED_OUTPUT_CONTROLLER
+Info (12021): Found 1 design units, including 1 entities, in source file door_lock.v
+    Info (12023): Found entity 1: DOOR_LOCK
+Info (12021): Found 1 design units, including 1 entities, in source file keypad_module.v
+    Info (12023): Found entity 1: KEYPAD_MODULE
+Warning (10463): Verilog HDL Declaration warning at MAIN_FSM.v(30): "new" is SystemVerilog-2005 keyword
+Info (12021): Found 1 design units, including 1 entities, in source file main_fsm.v
+    Info (12023): Found entity 1: MAIN_FSM
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_time_to_close.v
+    Info (12023): Found entity 1: COUNTER_FOR_TIME_TO_CLOSE
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_time_for_fail.v
+    Info (12023): Found entity 1: COUNTER_FOR_TIME_FOR_FAIL
+Info (12021): Found 1 design units, including 1 entities, in source file counter_for_time_one_minute.v
+    Info (12023): Found entity 1: COUNTER_FOR_TIME_ONE_MINUTE
+Info (12021): Found 1 design units, including 1 entities, in source file seven_segment_controller.v
+    Info (12023): Found entity 1: SEVEN_SEGMENT_CONTROLLER
+Info (12021): Found 1 design units, including 1 entities, in source file sound_generator_with_buzzer.v
+    Info (12023): Found entity 1: SOUND_GENERATOR_WITH_BUZZER
+Info (12127): Elaborating entity "DOOR_LOCK" for the top level hierarchy
+Info (12128): Elaborating entity "MAIN_FSM" for hierarchy "MAIN_FSM:main_machin"
+Warning (10858): Verilog HDL warning at MAIN_FSM.v(72): object time_for_lock used but never assigned
+Warning (10036): Verilog HDL or VHDL warning at MAIN_FSM.v(72): object "reset_time_for_lock" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(238): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(324): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(892): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(897): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(903): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(909): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(915): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(921): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(927): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(933): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(937): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(941): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(945): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(947): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(950): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(954): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(959): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(965): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(971): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(977): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(983): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(989): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(995): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(999): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(1003): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at MAIN_FSM.v(1005): truncated value with size 32 to match size of target (3)
+Warning (10030): Net "time_for_lock" at MAIN_FSM.v(72) has no driver or initial value, using a default initial value '0'
+Info (12128): Elaborating entity "COUNTER_FOR_TIME_TO_CLOSE" for hierarchy "MAIN_FSM:main_machin|COUNTER_FOR_TIME_TO_CLOSE:cfttc"
+Info (12128): Elaborating entity "COUNTER_FOR_TIME_FOR_FAIL" for hierarchy "MAIN_FSM:main_machin|COUNTER_FOR_TIME_FOR_FAIL:cftff"
+Info (12128): Elaborating entity "COUNTER_FOR_TIME_ONE_MINUTE" for hierarchy "MAIN_FSM:main_machin|COUNTER_FOR_TIME_ONE_MINUTE:cftom"
+Info (12128): Elaborating entity "KEYPAD_MODULE" for hierarchy "KEYPAD_MODULE:module_key"
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(78): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(81): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(94): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(95): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(96): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(103): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(111): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at KEYPAD_MODULE.v(119): truncated value with size 32 to match size of target (4)
+Info (12128): Elaborating entity "LED_OUTPUT_CONTROLLER" for hierarchy "LED_OUTPUT_CONTROLLER:led_control"
+Warning (10240): Verilog HDL Always Construct warning at LED_OUTPUT_CONTROLLER.v(25): inferring latch(es) for variable "internal_state", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at LED_OUTPUT_CONTROLLER.v(25): inferring latch(es) for variable "led_end", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at LED_OUTPUT_CONTROLLER.v(25): inferring latch(es) for variable "led", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at LED_OUTPUT_CONTROLLER.v(25): inferring latch(es) for variable "reset_time_t1", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at LED_OUTPUT_CONTROLLER.v(25): inferring latch(es) for variable "reset_time_t2", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "reset_time_t2" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "reset_time_t1" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[7]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[6]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[5]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[4]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[3]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[2]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[1]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led[0]" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "led_end" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.10010" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.10001" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.10000" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01111" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01110" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01101" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01100" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01011" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01010" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01001" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.01000" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00111" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00110" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00101" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00100" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00011" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00010" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00001" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "internal_state.00000" at LED_OUTPUT_CONTROLLER.v(25)
+Info (10041): Inferred latch for "previous_led_on" at LED_OUTPUT_CONTROLLER.v(27)
+Info (12128): Elaborating entity "COUNTER_FOR_TIME_T" for hierarchy "LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1"
+Info (12128): Elaborating entity "SEVEN_SEGMENT_CONTROLLER" for hierarchy "SEVEN_SEGMENT_CONTROLLER:sevenM"
+Warning (10230): Verilog HDL assignment warning at SEVEN_SEGMENT_CONTROLLER.v(37): truncated value with size 32 to match size of target (10)
+Info (12128): Elaborating entity "SOUND_GENERATOR_WITH_BUZZER" for hierarchy "SOUND_GENERATOR_WITH_BUZZER:buzzerM"
+Info (12128): Elaborating entity "COUNTER_FOR_SHORT_TIME" for hierarchy "SOUND_GENERATOR_WITH_BUZZER:buzzerM|COUNTER_FOR_SHORT_TIME:cfst"
+Info (12128): Elaborating entity "COUNTER_FOR_FIFTEN_SEC" for hierarchy "SOUND_GENERATOR_WITH_BUZZER:buzzerM|COUNTER_FOR_FIFTEN_SEC:cffs"
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.10001_1742 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01000_2165 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.10010_1695 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.10000_1789 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01111_1836 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01110_1883 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01101_1930 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01100_1977 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01011_2024 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01010_2071 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.01001_2118 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00111_2212 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00110_2259 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00101_2306 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00100_2353 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00011_2400 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt2|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00010_2447 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00001_2494 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal MAIN_FSM:main_machin|led_on
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|internal_state.00000_2541 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LED_OUTPUT_CONTROLLER:led_control|COUNTER_FOR_TIME_T:cftt1|time_t
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|reset_time_t2 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|reset_time_t1 has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13012): Latch LED_OUTPUT_CONTROLLER:led_control|led_end has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal reset
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "seg_data[0]" is stuck at GND
+Info (17049): 67 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file C:/altera/DOOR_LOCK/output_files/DOOR_LOCK.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1552 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 7 input pins
+    Info (21059): Implemented 27 output pins
+    Info (21061): Implemented 1518 logic cells
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 107 warnings
+    Info: Peak virtual memory: 345 megabytes
+    Info: Processing ended: Mon Dec 15 23:21:45 2014
+    Info: Elapsed time: 00:00:29
+    Info: Total CPU time (on all processors): 00:00:27
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/altera/DOOR_LOCK/output_files/DOOR_LOCK.map.smsg.
+
+

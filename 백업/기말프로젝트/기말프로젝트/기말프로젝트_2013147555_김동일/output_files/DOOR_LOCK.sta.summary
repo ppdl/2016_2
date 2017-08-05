@@ -1,0 +1,117 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'clk'
+Slack : -9.787
+TNS   : -2694.931
+
+Type  : Slow Model Setup 'reset'
+Slack : -9.158
+TNS   : -226.934
+
+Type  : Slow Model Setup 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : -4.539
+TNS   : -57.865
+
+Type  : Slow Model Setup 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : -4.518
+TNS   : -32.268
+
+Type  : Slow Model Hold 'reset'
+Slack : -3.074
+TNS   : -59.181
+
+Type  : Slow Model Hold 'clk'
+Slack : -2.605
+TNS   : -5.175
+
+Type  : Slow Model Hold 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : 0.499
+TNS   : 0.000
+
+Type  : Slow Model Hold 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : 0.951
+TNS   : 0.000
+
+Type  : Slow Model Recovery 'clk'
+Slack : -8.531
+TNS   : -704.140
+
+Type  : Slow Model Removal 'clk'
+Slack : 1.342
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'reset'
+Slack : -2.801
+TNS   : -317.519
+
+Type  : Slow Model Minimum Pulse Width 'clk'
+Slack : -1.941
+TNS   : -978.413
+
+Type  : Slow Model Minimum Pulse Width 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : -0.742
+TNS   : -28.196
+
+Type  : Slow Model Minimum Pulse Width 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : -0.742
+TNS   : -28.196
+
+Type  : Fast Model Setup 'clk'
+Slack : -2.418
+TNS   : -505.719
+
+Type  : Fast Model Setup 'reset'
+Slack : -2.297
+TNS   : -51.996
+
+Type  : Fast Model Setup 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : -0.827
+TNS   : -3.314
+
+Type  : Fast Model Setup 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : -0.733
+TNS   : -7.791
+
+Type  : Fast Model Hold 'clk'
+Slack : -1.379
+TNS   : -2.893
+
+Type  : Fast Model Hold 'reset'
+Slack : -0.940
+TNS   : -19.651
+
+Type  : Fast Model Hold 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : 0.356
+TNS   : 0.000
+
+Type  : Fast Model Recovery 'clk'
+Slack : -2.779
+TNS   : -146.744
+
+Type  : Fast Model Removal 'clk'
+Slack : 0.585
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clk'
+Slack : -1.380
+TNS   : -659.380
+
+Type  : Fast Model Minimum Pulse Width 'reset'
+Slack : -1.222
+TNS   : -47.294
+
+Type  : Fast Model Minimum Pulse Width 'KEYPAD_MODULE:module_key|clock_5khz'
+Slack : -0.500
+TNS   : -19.000
+
+Type  : Fast Model Minimum Pulse Width 'SEVEN_SEGMENT_CONTROLLER:sevenM|fnd_clock'
+Slack : -0.500
+TNS   : -19.000
+
+------------------------------------------------------------

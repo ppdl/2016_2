@@ -1,0 +1,341 @@
+module digital_door_lock(clk, key_row, key_col, fnd_pos, fnd_data);
+
+	input					clk;
+	input		[3:0]		key_row;
+	output	[2:0]		key_col;
+	output	[5:0]		fnd_pos;
+	output	[7:0]		fnd_data;
+
+	reg		[23:0]	display;
+	reg					blink;
+	wire		[3:0]		num;
+	
+	parameter			SN=0, SA=1, SS=2;
+	parameter			S0=3, S1=4, S2=5, S3=6, S4=7, S5=8, S6=9, S7=10, S8=11, S9=12;
+
+	timer							TIMER (clk, slow_clk);
+	seven_segment_display	SEVEN_SEG (slow_clk, display, blink, fnd_pos, fnd_data);
+	key_matrix					KEY (slow_clk, num, key_row, key_col);
+
+	
+	
+// you may add your own codes and variables here
+	//Current_State선언과 그에 관련된 parameter들
+	reg [2:0] 			Current_State;	
+	parameter 			RESET_STATE = 0, try_State = 1, initial_State = 2;
+	
+	//RESET_STATE선언과 그에 관련된 parameter들
+	reg [3:0]			R_STATE;
+	parameter			RS0 = 1,RS1 = 2, RS2 = 3, RS3 = 4, RS4 = 5;
+	
+	
+	//initial_State선언과 그에 관련된 parameter들
+	reg [2:0]			I_STATE;	
+	reg [3:0]			sel;
+	reg 					count_I;
+	parameter			IS0 = 0, IS1 = 1, IS2 = 2, IS3 = 3, IS4 = 4, OPEN = 5, CLOSE = 6;	
+	
+	//input을 저장하는 변수
+	reg [3:0]			 digit0, digit1, digit2, digit3;
+	
+	
+	//비밀번호 4자리
+	reg [3:0]			C3;
+	reg [3:0]			C2;
+	reg [3:0]			C1;
+	reg [3:0]			C0;
+	
+	
+	//초기화
+	initial begin
+		Current_State = RESET_STATE;
+		R_STATE = RS0;
+		I_STATE = IS1;
+		count_I = 0;
+	end
+
+	//MAIN STATE TRANSITION
+	//Current_State와 Input에 의해 Next state를 결정함
+	always @ (posedge slow_clk) begin
+		//리셋상태일 경우 비밀번호 입력
+		case(Current_State)
+			RESET_STATE:
+					case(R_STATE)
+						RS0:begin
+								display[23:20] = SN;
+								display[19:16] = SN;
+								display[15:12] = SN;
+								display[11:8]  = SN;
+								display[7:4]	= SN;
+								display[3:0]	= SS;
+								if(num != SN) R_STATE = RS1;								
+							end
+						RS1:begin
+								if(num != SN) begin
+									C3 = num;
+									wait(num == SN);
+									display[23:20] = SN;
+									display[19:16] = SN;
+									display[15:12] = SN;
+									display[11:8]  = SN;
+									display[7:4]	= SS;
+									display[3:0]	= C3;
+									R_STATE = RS2;
+									end
+								end
+						RS2:begin
+								if(num != SN) begin
+									C2 = num;
+									wait(num == SN);
+									display[23:20] = SN;
+									display[19:16] = SN;
+									display[15:12] = SN;
+									display[11:8]  = SS;
+									display[7:4]	= C3;
+									display[3:0]	= C2;
+									R_STATE = RS3;
+									end
+								end
+						RS3:begin
+								if(num != SN) begin
+									C1 = num;
+									wait(num == SN);
+									display[23:20] = SN;
+									display[19:16] = SN;
+									display[15:12] = SS;
+									display[11:8]  = C3;
+									display[7:4]	= C2;
+									display[3:0]	= C1;
+									R_STATE = RS4;
+									end
+								end
+						RS4:begin
+								if(num != SN) begin
+									C0 = num;
+									wait(num == SN);
+									display[23:20] = SN;
+									display[19:16] = SS;
+									display[15:12] = C3;
+									display[11:8]  = C2;
+									display[7:4]	= C1;
+									display[3:0]	= C0;
+									R_STATE = RS0;
+									Current_State = initial_State;
+								end
+							end
+					endcase
+			
+			initial_State:begin
+				display[23:20] = SN;
+				display[19:16] = SN;
+				display[15:12] = SN;
+				display[11:8]  = SN;
+				display[7:4]	= SN;
+				display[3:0]	= SN;
+				if(num == SA) begin
+					wait(num == SN);
+					Current_State = try_State;
+					sel = SA;
+				end
+				if(num == SS) begin 
+					wait(num == SN); 
+					Current_State = try_State; 
+					sel = SS;
+				end
+			end
+				
+			try_State:
+				case(I_STATE)
+					IS0:begin
+						display[23:20] = SN;
+						display[19:16] = SN;
+						display[15:12] = SN;
+						display[11:8]  = SN;
+						display[7:4]	= SN;
+						display[3:0]	= sel;
+						if(num != SN) I_STATE = IS1;
+					end
+					IS1:begin
+							if(sel == SA && num == SA) begin wait(num == SN); Current_State = initial_State; end
+							else if(num != SN) begin
+								digit3 = num;
+								count_I = count_I + 1;
+								wait(num == SN);
+								display[23:20] = SN;
+								display[19:16] = SN;
+								display[15:12] = SN;
+								display[11:8]  = SN;
+								display[7:4]	= sel;
+								display[3:0]	= digit3;
+								if(digit3 == C3) I_STATE = IS2;
+								else 				  I_STATE = CLOSE;									
+							end
+						end
+					IS2:begin
+							if(num != SN) begin
+								digit2 = num;
+								count_I = count_I + 1;
+								wait(num == SN);
+								display[23:20] = SN;
+								display[19:16] = SN;
+								display[15:12] = SN;
+								display[11:8]  = sel;
+								display[7:4]	= digit3;
+								display[3:0]	= digit2;
+								if(digit2 == C2) I_STATE = IS3;
+								else 			  I_STATE = CLOSE;								
+							end
+						end
+					IS3:begin
+							if(num != SN) begin
+								digit1 = num;
+								count_I = count_I + 1;
+								wait(num == SN);
+								display[23:20] = SN;
+								display[19:16] = SN;
+								display[15:12] = sel;
+								display[11:8]  = digit3;
+								display[7:4]	= digit2;
+								display[3:0]	= digit1;
+								if(digit1 == C1) I_STATE = IS4;
+								else 				  I_STATE = CLOSE;																
+							end
+						end
+					IS4:begin
+							if(num != SN) begin
+								digit0 = num;
+								count_I = count_I + 1;
+								wait(num == SN);
+								display[23:20] = SN;
+								display[19:16] = sel;
+								display[15:12] = digit3;
+								display[11:8]  = digit2;
+								display[7:4]	= digit1;
+								display[3:0]	= digit0;
+								if(num == C0) I_STATE = OPEN;
+								else			  I_STATE = CLOSE;									
+							end
+						end
+					OPEN:begin
+							if(num == SA && sel == SA) begin
+								wait(num == SN);
+								blink = 1;
+								display[23:20] = SN;
+								display[19:16] = sel;
+								display[15:12] = digit3;
+								display[11:8]  = digit2;
+								display[7:4]	= digit1;
+								display[3:0]	= digit0;
+								Current_State = initial_State;
+								I_STATE = IS1;
+							end
+							else if(num == SS && sel == SS) begin
+								wait(num == SN);
+								Current_State = RESET_STATE;
+								I_STATE = IS1;
+							end
+						end
+					CLOSE:begin
+							if(count_I == 2'b11 && num == SA && sel == SA) begin
+								I_STATE = IS1;
+								count_I = 0;
+							end
+						end
+				endcase
+		endcase
+	end
+	
+
+		/*
+		if(Current_State == initial_State) begin
+			if(D_STATE == D1 && num == SN) display[3:0] = SA;
+			else if(D_STATE == D1 && num != SN) begin
+				D_STATE = D2;
+				digit4 = num;
+				display[7:4] = SA;
+				display[3:0] = digit3;
+			end
+			else if(D_STATE == D2 && num != SN) begin
+				D_STATE = D3;
+				digit3 = num;
+				display[11:8] = SA;
+				display[7:4]  = digit3;
+				display[3:0]  = digit2;
+			end
+			else if(D_STATE == D3 && num != SN) begin
+				D_STATE = D4;
+				digit2 = num;
+				display[15:12] = SA;
+				display[11:8]  = digit4;
+				display[7:4]   = digit3;
+				display[3:0]   = digit2;
+			end
+			else if(D_STATE == D4 && num != SN) begin
+				D_STATE = D5;
+				digit1 = num;
+				display[19:16] = SA;
+				display[15:12] = digit4;
+				display[11:8]  = digit3;
+				display[7:4]	= digit2;
+				display[3:0]	= digit1;
+			end
+		end
+		if(Current_State == change_State) begin
+			if(D_STATE == D1 && num == SN) display[3:0] = SS;
+			else if(D_STATE == D1 && num != SN) begin
+				D_STATE = D2;
+				digit4 = num;
+				display[7:4] = SS;
+				display[3:0] = digit3;
+			end
+			else if(D_STATE == D2 && num != SN) begin
+				D_STATE = D3;
+				digit3 = num;
+				display[11:8] = SS;
+				display[7:4]  = digit3;
+				display[3:0]  = digit2;
+			end
+			else if(D_STATE == D3 && num != SN) begin
+				D_STATE = D4;
+				digit2 = num;
+				display[15:12] = SS;
+				display[11:8]  = digit4;
+				display[7:4]   = digit3;
+				display[3:0]   = digit2;
+			end
+			else if(D_STATE == D4 && num != SN) begin
+				D_STATE = D5;
+				digit1 = num;
+				display[19:16] = SS;
+				display[15:12] = digit4;
+				display[11:8]  = digit3;
+				display[7:4]	= digit2;
+				display[3:0]	= digit1;
+			end
+		end
+		
+	end
+	*/
+/*
+// example1 : keymatrix example
+	always @(*)
+	begin
+		if(num != SN) display[3:0] = num;
+	end
+
+// example2 : blinking 012345
+
+	always @(*)
+	begin
+		blink = 1;
+		display[23:20] = S0;
+		display[19:16] = S1;
+		display[15:12] = S2;
+		display[11:8] = S3;
+		display[7:4] = S4;
+		display[3:0] = S5;
+	end
+*/
+endmodule
+
+

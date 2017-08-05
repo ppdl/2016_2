@@ -1,0 +1,215 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\13.0
+vD_FF
+Z1 IY1PIjUgccYHWNb3C>=l3:2
+Z2 V72Z0H66h0;5aALOeMcPbk2
+Z3 dC:\altera\13.0
+Z4 w1480746373
+Z5 8C:/altera/13.0/D_FF.v
+Z6 FC:/altera/13.0/D_FF.v
+L0 3
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|C:/altera/13.0/D_FF.v|
+Z9 o-work work -O0
+Z10 n@d_@f@f
+Z11 !s100 IQkDeg605_X7J8]DeWA@U0
+Z12 !s108 1480746379.671000
+Z13 !s107 C:/altera/13.0/D_FF.v|
+!i10b 1
+!s85 0
+!s101 -O0
+ven_rs_latch
+Z14 !s100 oGzE?mZ_L3Te2`<PedfS03
+Z15 IkS19jkKcTKzF@gA1I=N<Z0
+Z16 V51PRP>`H6G<SQi1;@QH5D0
+R3
+Z17 w1480743786
+Z18 8C:/altera/13.0/en_rs_latch.v
+Z19 FC:/altera/13.0/en_rs_latch.v
+L0 3
+R7
+r1
+31
+Z20 !s90 -reportprogress|300|-work|work|C:/altera/13.0/en_rs_latch.v|
+R9
+Z21 !s108 1480746017.218000
+Z22 !s107 C:/altera/13.0/en_rs_latch.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vmand
+Z23 !s100 @QZNSHhZEEizYA468oX`a0
+Z24 IdcgkhSmWBV870=Tn[gIei0
+Z25 V4O0NIE5lc;T12@[I2[ThQ3
+R3
+Z26 w1480743826
+Z27 8C:/altera/13.0/mand.v
+Z28 FC:/altera/13.0/mand.v
+L0 3
+R7
+r1
+31
+Z29 !s90 -reportprogress|300|-work|work|C:/altera/13.0/mand.v|
+R9
+Z30 !s108 1480746017.984000
+Z31 !s107 C:/altera/13.0/mand.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vmnand
+Z32 !s100 6^@6cXQfZ=<1?_RYFj`dh2
+Z33 IG[7SSn[F=]IY3`V_8^3mQ1
+Z34 VLGEiQdO=bSVAU[8PN9@T91
+R3
+Z35 w1480743838
+Z36 8C:/altera/13.0/mnand.v
+Z37 FC:/altera/13.0/mnand.v
+L0 3
+R7
+r1
+31
+Z38 !s90 -reportprogress|300|-work|work|C:/altera/13.0/mnand.v|
+R9
+Z39 !s108 1480746017.687000
+Z40 !s107 C:/altera/13.0/mnand.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vmnor
+Z41 !s100 REI2HoVZ3GRaP42bkSAMI2
+Z42 IM805G<3RGgWiPmQ^YPd5Y3
+Z43 VG1J:OP0aY3HZUF5B1neej1
+R3
+Z44 w1480743899
+Z45 8C:/altera/13.0/mnor.v
+Z46 FC:/altera/13.0/mnor.v
+L0 3
+R7
+r1
+31
+Z47 !s90 -reportprogress|300|-work|work|C:/altera/13.0/mnor.v|
+R9
+Z48 !s108 1480746018.109000
+Z49 !s107 C:/altera/13.0/mnor.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vmnot
+Z50 !s100 9JK1MeM1A010AaMPdd<F:0
+Z51 IeJ8D32`HNg<<7kk0WFUhk0
+Z52 V46jFMnijiUP=3E7k1Z`_>0
+R3
+Z53 w1480743755
+Z54 8C:/altera/13.0/mnot.v
+Z55 FC:/altera/13.0/mnot.v
+L0 3
+R7
+r1
+31
+Z56 !s90 -reportprogress|300|-work|work|C:/altera/13.0/mnot.v|
+R9
+Z57 !s108 1480746017.843000
+Z58 !s107 C:/altera/13.0/mnot.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vrs_latch
+Z59 !s100 <M[@dOf_zBYlV8a:EaM3S2
+Z60 IYof9974DglnLk@o9^cCcg3
+Z61 Vm6SIJnkTYLoQBhioD@R2`1
+R3
+Z62 w1480743834
+Z63 8C:/altera/13.0/rs_latch.v
+Z64 FC:/altera/13.0/rs_latch.v
+L0 3
+R7
+r1
+31
+Z65 !s90 -reportprogress|300|-work|work|C:/altera/13.0/rs_latch.v|
+R9
+Z66 !s108 1480746017.093000
+Z67 !s107 C:/altera/13.0/rs_latch.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench
+Z68 !s100 BV[1a`1RlN4FY]_4bj5]k2
+Z69 I;LAS>BV=nRCC7dzPfLD5z1
+Z70 VhGfW:390DM[oDMzegDH9`2
+R3
+Z71 w1480745211
+Z72 8C:/altera/13.0/testbench.v
+Z73 FC:/altera/13.0/testbench.v
+L0 3
+R7
+r1
+31
+Z74 !s90 -reportprogress|300|-work|work|C:/altera/13.0/testbench.v|
+R9
+Z75 !s108 1480746017.515000
+Z76 !s107 C:/altera/13.0/testbench.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench0
+Z77 I4eLXoYO:IlOe_gb=>^h_H3
+Z78 V^WzFjW1jXILdbFmS<O;T?1
+R3
+Z79 w1480746685
+Z80 8C:/altera/13.0/testbench0.v
+Z81 FC:/altera/13.0/testbench0.v
+L0 3
+R7
+r1
+31
+Z82 !s90 -reportprogress|300|-work|work|C:/altera/13.0/testbench0.v|
+R9
+Z83 !s100 j9NJEU?Z]PUgnoAA3`;iV0
+Z84 !s108 1480746689.671000
+Z85 !s107 C:/altera/13.0/testbench0.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench2
+Z86 I`;lOMaGZ]h?N?Yf2J3XzQ0
+Z87 V<WjIFPfEhdLN6;1kTlCRZ3
+R3
+Z88 w1480746012
+Z89 8C:/altera/13.0/testbench2.v
+Z90 FC:/altera/13.0/testbench2.v
+L0 3
+R7
+r1
+31
+Z91 !s90 -reportprogress|300|-work|work|C:/altera/13.0/testbench2.v|
+R9
+Z92 !s100 YSh4L7Az[Pl6:gnA<9f=;2
+Z93 !s108 1480746018.250000
+Z94 !s107 C:/altera/13.0/testbench2.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench3
+!i10b 1
+!s100 2GdnBL;LILJUN;hFRDg3e2
+IFTjK0z@<dNK7n?;2Cl9mK0
+Z95 VR8[cCRigM8fzI7INY@BJP2
+R3
+w1480746936
+Z96 8C:/altera/13.0/testbench3.v
+Z97 FC:/altera/13.0/testbench3.v
+L0 3
+R7
+r1
+!s85 0
+31
+!s108 1480746938.343000
+!s107 C:/altera/13.0/testbench3.v|
+Z98 !s90 -reportprogress|300|-work|work|C:/altera/13.0/testbench3.v|
+!s101 -O0
+R9
